@@ -1,9 +1,9 @@
 import React from "react";
-import { createStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/styles";
 
-const useStyles = createStyles(() => ({
+const useStyles = makeStyles(() => ({
   root: {
-    backgroundColor: "#fbfbfb",
+    backgroundColor: "#f1eee4",
     minHeight: "100vh",
     minWidth: "100vw"
   }
