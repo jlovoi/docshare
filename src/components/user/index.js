@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Popover from "@material-ui/core/Popover";
+import Button from "@material-ui/core/Button";
 
 import SampleAvatar from "./avatar.jpg";
 
@@ -38,9 +39,18 @@ const useStyles = makeStyles(() => ({
     top: "70px !important"
   },
   popoverContent: {
-    height: "120px",
+    height: "150px",
     width: "190px",
-    backgroundColor: "#D9D2D1"
+    backgroundColor: "#D9D2D1",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "center"
+  },
+  button: {
+    width: "100%",
+    height: "30px",
+    textTransform: "none"
   },
   title: {
     fontSize: "12px"
@@ -73,7 +83,13 @@ const User = ({ name, title }) => {
           open={Boolean(anchorEl)}
           anchorEl={anchorEl}
         >
-          <div className={classes.popoverContent}>Hello</div>
+          <div className={classes.popoverContent}>
+            <Button className={classes.button}>Documents</Button>
+            <Button className={classes.button}>Notifications</Button>
+            <Button className={classes.button}>Inbox</Button>
+            <Button className={classes.button}>Settings</Button>
+            <Button className={classes.button}>Log Out</Button>
+          </div>
         </Popover>
       </div>
     </div>
