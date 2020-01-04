@@ -2,8 +2,10 @@ import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import Box from "@material-ui/core/Box";
 
-import { Avatar } from "../../../components";
+import { Avatar, ExpandCard } from "../../../components";
 import avatar from "../../../components/user/avatar.jpg";
+import brett from "../../../components/user/brett.jpg";
+import ray from "../../../components/user/ray.jpg";
 
 const useStyles = makeStyles(() => ({
   header: {
@@ -25,7 +27,15 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    position: "relative",
+    top: "60px"
+  },
+  cards: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    position: "relative"
   },
   progress: {
     position: "relative",
@@ -52,9 +62,15 @@ const Workflow = ({ reviewer }) => {
       <Box className={classes.box}>
         <div className={classes.group}>
           <Avatar avatar={avatar} check={true} first={true} />
-          <Avatar avatar={avatar} />
+          <Avatar avatar={ray} check={true} fullName="Sugar Ray" />
+          <Avatar avatar={brett} fullName="Frett Bene" />
         </div>
       </Box>
+      <div className={classes.cards}>
+        <ExpandCard />
+        <ExpandCard />
+        <ExpandCard />
+      </div>
     </div>
   );
 };
