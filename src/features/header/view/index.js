@@ -14,12 +14,12 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Component = () => {
+const Component = ({ name, title }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <User name="Joseph Lovoi" title="Software Developer" />
+      <User name={name} title={title} />
     </div>
   );
 };
