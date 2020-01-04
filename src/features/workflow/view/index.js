@@ -1,7 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import Box from "@material-ui/core/Box";
-import LinearProgress from "@material-ui/core/LinearProgress";
+
+import { Avatar } from "../../../components";
+import avatar from "../../../components/user/avatar.jpg";
 
 const useStyles = makeStyles(() => ({
   header: {
@@ -18,6 +20,12 @@ const useStyles = makeStyles(() => ({
     width: "90%",
     margin: "2.5%",
     padding: "2.5%"
+  },
+  group: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
   },
   progress: {
     position: "relative",
@@ -42,12 +50,10 @@ const Workflow = ({ reviewer }) => {
         <div className={classes.subTitle}>Awaiting Review from Frett Bene</div>
       </div>
       <Box className={classes.box}>
-        <LinearProgress
-          className={classes.progress}
-          color="primary"
-          variant="determinate"
-          value={50}
-        />
+        <div className={classes.group}>
+          <Avatar avatar={avatar} check={true} first={true} />
+          <Avatar avatar={avatar} />
+        </div>
       </Box>
     </div>
   );
