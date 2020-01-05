@@ -1,7 +1,7 @@
 import React from "react";
-import { createStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/styles";
 
-const useStyles = createStyles(() => ({
+const useStyles = makeStyles(() => ({
   root: {
     width: "100%",
     height: "120px",
