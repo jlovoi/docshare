@@ -1,8 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import Component from "../view";
 
-const Container = props => {
-  return <Component {...props} />;
+const Container = ({ doc }) => {
+  return <Component />;
 };
 
-export default Container;
+const mapStateToProps = state => ({});
+
+export default connect(mapStateToProps)(Container);

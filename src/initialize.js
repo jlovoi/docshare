@@ -1,13 +1,15 @@
 import { put, takeEvery } from "redux-saga/effects";
 
 import { user } from "./web-core/user";
+import { doc } from "./web-core/doc";
 import initApplication from "./constants";
 
 const { fetchUser } = user.actions;
+const { fetchDoc } = doc.actions;
 
 function* init() {
-  console.log("HEllo");
   yield put(fetchUser("123"));
+  yield put(fetchDoc("123"));
 }
 
 function* initializeApp() {

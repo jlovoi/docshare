@@ -1,18 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  user: {},
-  firstName: "Joel",
-  lastName: "Ovoi",
-  id: "AAAA-BBBB-CCCC-DDDD",
-  title: "Software Developer"
+  user: {}
+  // firstName: "Joel",
+  // lastName: "Ovoi",
+  // id: "AAAA-BBBB-CCCC-DDDD",
+  // title: "Software Developer"
 };
 
 const user = createSlice({
   name: "user",
   initialState: initialState,
   reducers: {
-    fetchUser: (state, payload) => {
+    fetchUser: () => {
       // saga
     },
     setUser: (state, action) => {

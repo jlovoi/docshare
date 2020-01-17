@@ -1,3 +1,4 @@
 import fetchUser from "./user/sagas";
+import fetchDocSaga from "./doc/sagas";
 
-export default fetchUser;
+export default [fetchUser, fetchDocSaga];

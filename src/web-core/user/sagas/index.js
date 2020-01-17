@@ -1,3 +1,3 @@
-import fetchUser from "./fetch-user";
+import fetchUserSaga from "./fetch-user";
 
-export default fetchUser;
+export default fetchUserSaga;
