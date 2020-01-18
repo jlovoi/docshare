@@ -73,7 +73,7 @@ const Workflow = ({ doc = {}, users = [] }) => {
               avatar={avatars[index]}
               check={index <= doc.stage}
               first={index === 0}
-              fullName={user.first_name + " " + user.last_name}
+              fullName={user.firstName + " " + user.lastName}
             />
           ))}
         </div>

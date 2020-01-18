@@ -1,10 +1,16 @@
-export const getFirstName = state => state.user.firstName;
+import { createSelector } from "reselect";
 
-export const getLastName = state => state.user.lastName;
+export const getUser = state => state.user.user;
 
-export const getFullName = state =>
-  state.user.firstName + " " + state.user.lastName;
+export const getFirstName = createSelector(getUser, user => user.firstName);
 
-export const getUserId = state => state.user.id;
+export const getLastName = createSelector(getUser, user => user.lastName);
 
-export const getTitle = state => state.user.title;
+export const getFullName = createSelector(
+  getUser,
+  user => user.firstName + " " + user.lastName
+);
+
+export const getUserId = createSelector(getUser, user => user._id);
+
+export const getTitle = createSelector(getUser, user => user.title);
