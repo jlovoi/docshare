@@ -12,8 +12,12 @@ const doc = createSlice({
       // saga
     },
     setDoc: (state, action) => {
-      state.doc = action.payload;
+      state.document = action.payload;
     }
   }
 });
-export default doc;
+
+const reducer = doc.reducer;
+const actions = doc.actions;
+
+export { reducer, actions };

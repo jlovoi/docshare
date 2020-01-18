@@ -30,4 +30,7 @@ const user = createSlice({
   }
 });
 
-export default user;
+const reducer = user.reducer;
+const actions = user.actions;
+
+export { reducer, actions };
