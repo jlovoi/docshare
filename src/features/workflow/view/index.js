@@ -50,7 +50,13 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Workflow = ({ reviewer }) => {
+const avatars = {
+  0: avatar,
+  1: brett,
+  3: ray
+};
+
+const Workflow = ({ doc = {}, users = [] }) => {
   const classes = useStyles();
 
   return (
@@ -61,9 +67,15 @@ const Workflow = ({ reviewer }) => {
       </div>
       <Box className={classes.box}>
         <div className={classes.group}>
-          <Avatar avatar={avatar} check={true} first={true} />
-          <Avatar avatar={ray} check={true} fullName="Sugar Ray" />
-          <Avatar avatar={brett} fullName="Frett Bene" />
+          {users.map((user, index) => (
+            <Avatar
+              key={user._id}
+              avatar={avatars[index]}
+              check={index <= doc.stage}
+              first={index === 0}
+              fullName={user.firstName + " " + user.lastName}
+            />
+          ))}
         </div>
       </Box>
       <div className={classes.cards}>

@@ -1,26 +1,36 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  firstName: "Joel",
-  lastName: "Ovoi",
-  id: "AAAA-BBBB-CCCC-DDDD",
-  title: "Software Developer"
+  user: {}
+  // firstName: "Joel",
+  // lastName: "Ovoi",
+  // id: "AAAA-BBBB-CCCC-DDDD",
+  // title: "Software Developer"
 };
 
 const user = createSlice({
   name: "user",
   initialState: initialState,
   reducers: {
-    setFirstName: (state, name) => {
-      state.firstName = name;
+    fetchUser: () => {
+      // saga
     },
-    setLastName: (state, name) => {
-      state.lastName = name;
+    setUser: (state, action) => {
+      state.user = action.payload;
     },
-    setTitle: (state, title) => {
-      state.title = title;
+    setFirstName: (state, action) => {
+      state.firstName = action.payload;
+    },
+    setLastName: (state, action) => {
+      state.lastName = action.payload;
+    },
+    setTitle: (state, action) => {
+      state.title = action.payload;
     }
   }
 });
 
-export default user;
+const reducer = user.reducer;
+const actions = user.actions;
+
+export { reducer, actions };
