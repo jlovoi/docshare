@@ -1,8 +1,8 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import doc from "../reducer";
+import { actions } from "../reducer";
 import apiFetchDoc from "../../../api-core/docs/fetch-doc";
 
-const { fetchDoc, setDoc } = doc.actions;
+const { fetchDoc, setDoc } = actions;
 
 function* saga({ payload }) {
   try {

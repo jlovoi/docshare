@@ -1,7 +1,7 @@
 import { put, takeEvery } from "redux-saga/effects";
 
-import { user } from "./web-core/user";
-import { doc } from "./web-core/doc";
+import { user } from "./web-core";
+import { doc } from "./web-core";
 import initApplication from "./constants";
 
 const { fetchUser } = user.actions;

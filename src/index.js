@@ -8,7 +8,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import App from "./features/app";
 import * as serviceWorker from "./serviceWorker";
-import reducer from "./web-core";
+import reducers from "./web-core/reducers";
 import sagas from "./web-core/sagas";
 import init from "./initialize";
 import "./index.css";
@@ -16,7 +16,7 @@ import "./index.css";
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
-  reducer,
+  reducers,
   composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
 

@@ -1,4 +1,4 @@
-import { createSelector } from "react-redux";
+import { createSelector } from "reselect";
 
 import { getDocument } from "./base-funcs";
 

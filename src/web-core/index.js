@@ -1,6 +1,4 @@
-import { combineReducers } from "@reduxjs/toolkit";
+import * as user from "./user";
+import * as doc from "./doc";
 
-import { user } from "./user";
-import { doc } from "./doc";
-
-export default combineReducers({ user: user.reducer, doc: doc.reducer });
+export { user, doc };

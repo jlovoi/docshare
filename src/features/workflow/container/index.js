@@ -3,10 +3,15 @@ import { connect } from "react-redux";
 
 import Component from "../view";
 
+import * as Core from "../../../web-core";
+
 const Container = ({ doc }) => {
-  return <Component />;
+  console.log(doc);
+  return <Component doc={doc} users={doc.users} />;
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  doc: Core.doc.selectors.getDocument(state)
+});
 
 export default connect(mapStateToProps)(Container);
