@@ -78,11 +78,7 @@ const Workflow = ({ doc = {}, users = [] }) => {
           ))}
         </div>
       </Box>
-      <div className={classes.cards}>
-        <ExpandCard />
-        <ExpandCard />
-        <ExpandCard />
-      </div>
+      <div className={classes.cards}></div>
     </div>
   );
 };
