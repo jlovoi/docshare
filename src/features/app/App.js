@@ -8,7 +8,7 @@ const App = () => {
     <AppFrame>
       <Header />
       <Router>
-        <Route path="/" component={Workflow} />
+        <Route path="/doc" component={Workflow} />
       </Router>
     </AppFrame>
   );

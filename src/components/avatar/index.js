@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import Avatar from "@material-ui/core/Avatar";
+import Popover from "@material-ui/core/Popover";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 
@@ -8,8 +9,7 @@ const useStyles = makeStyles(() => ({
   root: {
     height: "120px",
     width: "120px",
-    marginRight: "60px",
-    marginLeft: "60px"
+    margin: "60px"
   },
   avatar: {
     height: "120px",
@@ -30,27 +30,29 @@ const useStyles = makeStyles(() => ({
   },
   line: {
     borderRadius: "8px",
-    width: "150%",
+    height: "150%",
+    width: "0px",
     border: "2px solid #040404",
     position: "relative",
-    bottom: "50%",
+    bottom: "250%",
     zIndex: 0,
-    right: "150%"
+    left: "50%"
+  },
+  info: {
+    padding: "6px"
   },
   name: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center"
+    fontSize: "16px"
   },
   dashedLine: {
     borderRadius: "8px",
-    width: "150%",
+    height: "150%",
+    width: "0px",
     border: "2px dashed #040404",
     position: "relative",
-    bottom: "50%",
+    bottom: "250%",
     zIndex: 0,
-    right: "150%"
+    left: "50%"
   },
   dummyLine: {
     borderRadius: "8px",
@@ -59,6 +61,13 @@ const useStyles = makeStyles(() => ({
     position: "relative",
     bottom: "50%",
     zIndex: 0
+  },
+  popover: {
+    position: "fixed !important",
+    left: "125px !important"
+  },
+  title: {
+    fontSize: "12px"
   }
 }));
 
@@ -75,9 +84,13 @@ const Component = ({
   avatar,
   check = false,
   first = false,
-  fullName = "Joel Ovoi"
+  fullName = "Joel Ovoi",
+  title
 }) => {
   const classes = useStyles();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
 
   return (
     <div className={classes.root}>
@@ -86,9 +99,23 @@ const Component = ({
       ) : (
         <QueryBuilderIcon className={classes.waiting} />
       )}
-      <Avatar className={classes.avatar} src={avatar} />
+      <Avatar
+        className={classes.avatar}
+        src={avatar}
+        onClick={e => setAnchorEl(e.currentTarget)}
+      />
+      <Popover
+        open={open}
+        anchorEl={anchorEl}
+        onClose={() => setAnchorEl(null)}
+        className={classes.popover}
+      >
+        <div className={classes.info}>
+          <div className={classes.name}>{fullName}</div>
+          <div className={classes.title}>{title}</div>
+        </div>
+      </Popover>
       {showLine(first, check, classes)}
-      <div className={classes.name}>{fullName}</div>
     </div>
   );
 };
