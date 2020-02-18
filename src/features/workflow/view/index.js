@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 import Box from "@material-ui/core/Box";
 
 import { Avatar } from "../../../components";
-import Doc from "./doc-info";
+import DocInfo from "./doc-info";
 import avatar from "../../../components/user/avatar.jpg";
 import brett from "../../../components/user/brett.jpg";
 import ray from "../../../components/user/ray.jpg";
@@ -45,7 +45,7 @@ const avatars = {
   3: ray
 };
 
-const Workflow = ({ doc = {}, users = [], docInfo = {} }) => {
+const Workflow = ({ doc = {}, users = [], docInfo = {}, insertsInfo }) => {
   const classes = useStyles();
 
   return (
@@ -65,7 +65,7 @@ const Workflow = ({ doc = {}, users = [], docInfo = {} }) => {
             ))}
           </div>
         </Box>
-        <Doc docInfo={docInfo} />
+        <DocInfo docInfo={docInfo} insertsInfo={insertsInfo} />
       </div>
     </div>
   );

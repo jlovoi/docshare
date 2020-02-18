@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  document: {
+  docInfo: {
     comments: [
       {
         authors: ["Brett H Fene"],
@@ -20,41 +20,21 @@ const initialState = {
         line:
           "Programming Languages:_______________Number of Error Messages:______________________",
         inserted: [
-          {
-            author: [],
-            date: [],
-            content: "Program"
-          },
+          { author: [], date: [], content: "Program" },
           {
             author: ["Lovoi, Joseph W."],
             date: ["2020-01-18T14:06:00Z"],
             content: "ming"
           },
-          {
-            author: [],
-            date: [],
-            content: " "
-          },
-          {
-            author: [],
-            date: [],
-            content: "Language"
-          },
+          { author: [], date: [], content: " " },
+          { author: [], date: [], content: "Language" },
           {
             author: ["Lovoi, Joseph W."],
             date: ["2020-01-18T14:06:00Z"],
             content: "s"
           },
-          {
-            author: [],
-            date: [],
-            content: ":_"
-          },
-          {
-            author: [],
-            date: [],
-            content: "______________Number"
-          },
+          { author: [], date: [], content: ":_" },
+          { author: [], date: [], content: "______________Number" },
           {
             author: [],
             date: [],
@@ -62,7 +42,6 @@ const initialState = {
           }
         ]
       },
-
       {
         line:
           "Where\u2019s my red stapler? Did you take it? ___________________________________________________________________________",
@@ -80,6 +59,23 @@ const initialState = {
           }
         ]
       }
+    ],
+    lines: [
+      "T.P.S. REPORT",
+      "COVER SHEET",
+      "Prepared By:_______________________________________________Date:_____________",
+      "Device/Program Type:_________________________________________________________",
+      "Product Code:______________Customer:_________________________________________",
+      "Vendor:_____________________________________________________________________",
+      "Due Date:_______________________Data Loss:___________________________________",
+      "Test Date:_______________________Target Run Date:______________________________",
+      "Program Run Time:_______________Reference Guide:______________________________",
+      "Programming Languages:_______________Number of Error Messages:______________________",
+      "Comments:__________________________________________________________________",
+      "Where\u2019s my red stapler? Did you take it? ___________________________________________________________________________",
+      "___________________________________________________________________________",
+      "___________________________________________________________________________",
+      "CONFIDENTIAL"
     ]
   }
 };

@@ -1,4 +1,5 @@
-import { getDocument } from "./base-funcs";
+import { getDocument, getDocInfo } from "./base-funcs";
 import getDocUsers from "./get-doc-users";
+import getInsertsInfo from "./get-inserts-info";
 
-export { getDocument, getDocUsers };
+export { getDocument, getDocInfo, getDocUsers, getInsertsInfo };
