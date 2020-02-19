@@ -3,6 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import InsertPopover from "./insert-popover";
 
+import { Bubble } from "../../../components";
+
 const useStyles = makeStyles(theme => ({
   flex: {
     display: "flex",
@@ -58,7 +60,10 @@ const DocInfo = ({ docInfo, insertsInfo }) => {
   const { lines } = docInfo;
 
   return (
-    <div className={classes.root}>{showLines(lines, insertsInfo, classes)}</div>
+    <div className={classes.root}>
+      {showLines(lines, insertsInfo, classes)}
+      <Bubble />
+    </div>
   );
 };
 
