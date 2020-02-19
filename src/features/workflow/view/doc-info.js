@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   margin: {
     marginLeft: "3px"
   },
-  root: {
+  workflow: {
     position: "fixed",
     height: "80vh",
     width: "73%",
@@ -60,9 +60,8 @@ const DocInfo = ({ docInfo, insertsInfo }) => {
   const { lines } = docInfo;
 
   return (
-    <div className={classes.root}>
+    <div className={classes.workflow}>
       {showLines(lines, insertsInfo, classes)}
-      <Bubble />
     </div>
   );
 };

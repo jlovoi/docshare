@@ -6,7 +6,7 @@ import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 
 const useStyles = makeStyles(() => ({
-  root: {
+  avatarRoot: {
     height: "120px",
     width: "120px",
     margin: "60px"
@@ -93,7 +93,7 @@ const Component = ({
   const open = Boolean(anchorEl);
 
   return (
-    <div className={classes.root}>
+    <div className={classes.avatarRoot}>
       {check ? (
         <CheckCircleIcon className={classes.check} />
       ) : (

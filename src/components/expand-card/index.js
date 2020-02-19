@@ -7,7 +7,7 @@ import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(() => ({
-  root: {
+  expandCard: {
     height: "100%",
     width: "200px",
     marginLeft: "20px",
@@ -35,7 +35,7 @@ const Component = () => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.expandCard}>
       <CardContent className={classes.header}>
         <Button
           className={classes.button}

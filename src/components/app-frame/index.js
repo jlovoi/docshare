@@ -2,17 +2,17 @@ import React from "react";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(() => ({
-  root: {
+  appframe: {
     backgroundColor: "#f1eee4",
-    minHeight: "100vh",
-    minWidth: "100vw"
+    minHeight: "95vh",
+    padding: "24px"
   }
 }));
 
 const AppFrame = ({ children }) => {
   const classes = useStyles();
 
-  return <div className={classes.root}>{children}</div>;
+  return <div className={classes.appframe}>{children}</div>;
 };
 
 export default AppFrame;

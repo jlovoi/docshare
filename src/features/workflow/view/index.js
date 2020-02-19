@@ -28,7 +28,7 @@ const useStyles = makeStyles(() => ({
     position: "relative",
     top: "40%"
   },
-  root: {
+  workflowRoot: {
     overflowY: "auto",
     overflowX: "hidden",
     display: "flex",
@@ -50,7 +50,7 @@ const Workflow = ({ doc = {}, users = [], docInfo = {}, insertsInfo }) => {
 
   return (
     <div>
-      <div className={classes.root}>
+      <div className={classes.workflowRoot}>
         <Box className={classes.box}>
           <div className={classes.group}>
             {users.map((user, index) => (
