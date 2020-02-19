@@ -1,3 +1,11 @@
+import { connect } from "react-redux";
+
+import { users } from "../../../web-core";
+
 import Component from "../view";
 
-export default Component;
+const mapStateToProps = state => ({
+  users: users.selectors.users(state)
+});
+
+export default connect(mapStateToProps)(Component);

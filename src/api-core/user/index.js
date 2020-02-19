@@ -1,3 +1,4 @@
-import fetchUser from "./fetch-user";
+import all from "./all";
+import user from "./fetch-user";
 
-export { fetchUser };
+export default { all, user };

@@ -1,25 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 import { useDropzone } from "react-dropzone";
 
+import ArrowIcon from "@material-ui/icons/ArrowForward";
+import CancelIcon from "@material-ui/icons/Cancel";
+import FileIcon from "@material-ui/icons/Description";
+import UserIcon from "@material-ui/icons/AccountCircle";
+
+import { CheckGroup } from "../../../components";
+import Step from "./step";
+
 const useStyles = makeStyles(theme => ({
-  description: {
-    fontSize: "14px"
+  arrow: {
+    alignSelf: "center",
+    margin: "8px"
+  },
+  button: {
+    backgroundColor: "#8ae38c",
+    textTransform: "none",
+    marginTop: "32px"
+  },
+  cancel: {
+    fontSize: "16px"
   },
   dropZone: {
     height: "50px"
   },
-  stepBox: {
-    marginTop: "24px",
-    width: "60%",
-    padding: "12px",
-    borderRadius: "8px",
-    backgroundColor: "#d7d7d7"
+  file: {
+    fontSize: "64px"
   },
-  step: {
-    fontSize: "24px",
-    fontWeight: "bold",
-    textDecoration: "underline"
+  files: {
+    height: "100px",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  fileContainer: {
+    display: "flex",
+    flexDirection: "column",
+    width: "64px",
+    margin: "20px"
+  },
+  fileName: {
+    fontSize: "10px",
+    maxWidth: "100%",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    textAlign: "center"
+  },
+  flex: {
+    display: "flex"
   },
   uploadRoot: {
     height: "100%",
@@ -30,13 +62,51 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Step = ({ step, description, content, classes }) => (
-  <div className={classes.stepBox}>
-    <div className={classes.step}>{`Step ${step}`}</div>
-    <div className={classes.description}>{description}</div>
-    {content}
+const onCancel = (files, setFiles) => name => {
+  if (files.length === 1) {
+    setFiles(null);
+  } else {
+    setFiles(files.filter(f => f.name !== name));
+  }
+};
+
+const userOrder = (users, selectedUsers, classes) => (
+  <div className={classes.files}>
+    {selectedUsers.map((userId, index) => (
+      <div key={`selected-${userId}`} className={classes.fileContainer}>
+        <div className={classes.flex}>
+          <UserIcon className={classes.file} />
+          {index !== selectedUsers.length - 1 && (
+            <ArrowIcon className={classes.arrow} />
+          )}
+        </div>
+        <div className={classes.fileName}>
+          {users.find(user => user._id === userId).username}
+        </div>
+      </div>
+    ))}
   </div>
 );
+
+const showFiles = (files, onCancel, classes) => {
+  return (
+    <div className={classes.files}>
+      {files.map(f => (
+        <div className={classes.fileContainer} key={`div-${f.name}`}>
+          <div className={classes.flex}>
+            <FileIcon className={classes.file} key={f.name} />
+            <CancelIcon
+              className={classes.cancel}
+              onClick={() => onCancel(f.name)}
+              key={`cancel-${f.name}`}
+            />
+          </div>
+          <div className={classes.fileName}>{f.name}</div>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 const dropzone = (getRootProps, getInputProps, isDragActive) => (
   <div
@@ -57,25 +127,70 @@ const dropzone = (getRootProps, getInputProps, isDragActive) => (
   </div>
 );
 
-const onDrop = droppedFiles => {
-  console.log(droppedFiles);
+const setSelected = (selectedUsers, setSelectedUsers) => e => {
+  if (selectedUsers.includes(e.target.value)) {
+    setSelectedUsers(selectedUsers.filter(user => user !== e.target.value));
+  } else {
+    setSelectedUsers([...selectedUsers, e.target.value]);
+  }
 };
 
-const Upload = ({ users }) => {
+export default ({ users }) => {
   const classes = useStyles();
 
+  const onDrop = droppedFiles => {
+    setFiles(droppedFiles);
+  };
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+  const [files, setFiles] = useState(null);
+  const [selectedUsers, setSelectedUsers] = useState([]);
+
+  const notDocx =
+    files &&
+    !files.every(
+      f =>
+        f.type ===
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    );
+  const disabled =
+    !files || files.length > 1 || notDocx || !selectedUsers.length;
+
+  const group = users.map(user => ({
+    ...user,
+    value: user._id,
+    label: user.email
+  }));
 
   return (
     <div className={classes.uploadRoot}>
       <Step
         step={1}
         description="Upload a file"
-        classes={classes}
-        content={dropzone(getRootProps, getInputProps, isDragActive)}
+        content={
+          files
+            ? showFiles(files, onCancel(files, setFiles), classes)
+            : dropzone(getRootProps, getInputProps, isDragActive)
+        }
+        error={notDocx && "Only .docx files are supported!"}
       />
+      <Step
+        step={2}
+        description="Select and order users to share with"
+        classes={classes}
+        content={
+          <CheckGroup
+            group={group}
+            onChange={setSelected(selectedUsers, setSelectedUsers)}
+            checked={selectedUsers}
+          />
+        }
+        subContent={userOrder(users, selectedUsers, classes)}
+      />
+      <Button className={classes.button} disabled={disabled}>
+        Submit
+      </Button>
     </div>
   );
 };
-
-export default Upload;

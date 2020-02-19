@@ -3,8 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import InsertPopover from "./insert-popover";
 
-import { Bubble } from "../../../components";
-
 const useStyles = makeStyles(theme => ({
   flex: {
     display: "flex",
