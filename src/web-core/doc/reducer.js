@@ -89,6 +89,12 @@ const doc = createSlice({
     },
     setDoc: (state, action) => {
       state.document = action.payload;
+    },
+    submitDocInit: () => {
+      // saga
+    },
+    submitDocSuccess: (state, { payload }) => {
+      state.document = payload;
     }
   }
 });

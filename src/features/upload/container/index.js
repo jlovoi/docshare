@@ -1,11 +1,18 @@
 import { connect } from "react-redux";
 
-import { users } from "../../../web-core";
+import Core from "../../../web-core";
 
 import Component from "../view";
 
+const { submitDocInit } = Core.doc.actions;
+
 const mapStateToProps = state => ({
-  users: users.selectors.users(state)
+  users: Core.users.selectors.users(state),
+  userId: Core.user.selectors.getUserId(state)
 });
 
-export default connect(mapStateToProps)(Component);
+const mapDispatchToProps = dispatch => ({
+  submitDoc: doc => dispatch(submitDocInit(doc))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Component);

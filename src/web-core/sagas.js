@@ -1,5 +1,7 @@
 import fetchUser from "./user/sagas";
-import fetchDocSaga from "./doc/sagas";
+import { sagas as docSagas } from "./doc";
 import fetchAllUsers from "./users/sagas";
 
-export default [fetchUser, fetchDocSaga, fetchAllUsers];
+const { fetchDoc, submitDoc } = docSagas;
+
+export default [fetchUser, fetchDoc, submitDoc, fetchAllUsers];

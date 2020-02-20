@@ -1,4 +1,4 @@
 import user from "./user";
-import doc from "./docs";
+import docs from "./docs";
 
-export { user, doc };
+export default { user, docs };

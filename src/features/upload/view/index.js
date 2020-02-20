@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import Input from "@material-ui/core/Input";
 import { useDropzone } from "react-dropzone";
 
 import ArrowIcon from "@material-ui/icons/ArrowForward";
@@ -53,6 +54,10 @@ const useStyles = makeStyles(theme => ({
   flex: {
     display: "flex"
   },
+  input: {
+    width: "60%",
+    textAlignLast: "center"
+  },
   uploadRoot: {
     height: "100%",
     width: "100%",
@@ -69,6 +74,17 @@ const onCancel = (files, setFiles) => name => {
     setFiles(files.filter(f => f.name !== name));
   }
 };
+
+const nameDocument = (docName, setDocName, classes) => (
+  <div className={classes.files}>
+    <Input
+      className={classes.input}
+      value={docName}
+      type="text"
+      onChange={e => setDocName(e.target.value)}
+    />
+  </div>
+);
 
 const userOrder = (users, selectedUsers, classes) => (
   <div className={classes.files}>
@@ -122,7 +138,7 @@ const dropzone = (getRootProps, getInputProps, isDragActive) => (
     {isDragActive ? (
       <p>Drop the files here ...</p>
     ) : (
-      <p>Drag 'n' drop some files here, or click to select files</p>
+      <p>Drag-n-drop a file here, or click to select a file</p>
     )}
   </div>
 );
@@ -135,7 +151,34 @@ const setSelected = (selectedUsers, setSelectedUsers) => e => {
   }
 };
 
-export default ({ users }) => {
+const onSubmit = (
+  droppedFiles,
+  docName,
+  userId,
+  selectedUsers,
+  submitDoc
+) => () => {
+  droppedFiles.forEach(file => {
+    const reader = new FileReader();
+
+    reader.onabort = (r, e) => console.error("Reader aborted!", e);
+    reader.onerror = (r, e) => console.error("Reader error!", e);
+    reader.onload = () => {
+      const binary = reader.result;
+      const doc = {
+        name: docName,
+        users: selectedUsers,
+        stage: 0,
+        createdBy: userId,
+        content: binary
+      };
+      submitDoc(doc);
+    };
+    reader.readAsBinaryString(file);
+  });
+};
+
+export default ({ users, submitDoc, userId }) => {
   const classes = useStyles();
 
   const onDrop = droppedFiles => {
@@ -144,6 +187,7 @@ export default ({ users }) => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
+  const [docName, setDocName] = useState("");
   const [files, setFiles] = useState(null);
   const [selectedUsers, setSelectedUsers] = useState([]);
 
@@ -155,7 +199,7 @@ export default ({ users }) => {
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     );
   const disabled =
-    !files || files.length > 1 || notDocx || !selectedUsers.length;
+    !files || files.length > 1 || notDocx || !selectedUsers.length || !docName;
 
   const group = users.map(user => ({
     ...user,
@@ -167,6 +211,11 @@ export default ({ users }) => {
     <div className={classes.uploadRoot}>
       <Step
         step={1}
+        description="Name your new document"
+        content={nameDocument(docName, setDocName, classes)}
+      />
+      <Step
+        step={2}
         description="Upload a file"
         content={
           files
@@ -176,7 +225,7 @@ export default ({ users }) => {
         error={notDocx && "Only .docx files are supported!"}
       />
       <Step
-        step={2}
+        step={3}
         description="Select and order users to share with"
         classes={classes}
         content={
@@ -188,7 +237,11 @@ export default ({ users }) => {
         }
         subContent={userOrder(users, selectedUsers, classes)}
       />
-      <Button className={classes.button} disabled={disabled}>
+      <Button
+        className={classes.button}
+        disabled={disabled}
+        onClick={onSubmit(files, docName, userId, selectedUsers, submitDoc)}
+      >
         Submit
       </Button>
     </div>

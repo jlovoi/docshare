@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Component from "../view";
 
-import * as Core from "../../../web-core";
+import Core from "../../../web-core";
 
 const { getFullName, getTitle } = Core.user.selectors;
 

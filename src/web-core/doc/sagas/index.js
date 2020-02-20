@@ -1,3 +1,4 @@
-import fetchDocSaga from "./fetch-doc";
+import fetchDoc from "./fetch-doc";
+import submitDoc from "./submit-doc";
 
-export default fetchDocSaga;
+export default { fetchDoc, submitDoc };
