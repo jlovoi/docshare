@@ -1,7 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
-import { User } from "../../../components";
 import Button from "@material-ui/core/Button";
+import { useHistory } from "react-router-dom";
+
+import { User } from "../../../components";
 
 const useStyles = makeStyles(() => ({
   button: {
@@ -32,9 +34,20 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const buttons = classes => [
-  <Button key="new-doc-nav" className={classes.button}>
-    New Doc
+const buttons = (history, classes) => [
+  <Button
+    key="home-nav"
+    className={classes.button}
+    onClick={() => history.push("/")}
+  >
+    Your Documents
+  </Button>,
+  <Button
+    key="new-doc-nav"
+    className={classes.button}
+    onClick={() => history.push("/upload")}
+  >
+    New Document
   </Button>,
   // <Button className={classes.button}>Documents</Button>,
   // <Button className={classes.button}>Notifications</Button>,
@@ -47,6 +60,8 @@ const buttons = classes => [
 const Component = ({ name, title, awaitingUser }) => {
   const classes = useStyles();
 
+  const history = useHistory();
+
   return (
     <div className={classes.flex}>
       <div className={classes.header}>
@@ -55,7 +70,11 @@ const Component = ({ name, title, awaitingUser }) => {
           {`Awaiting Review from ${awaitingUser || "Frett Bene"}`}
         </div>
       </div>
-      <User name={name} title={title} popoverContent={buttons(classes)} />
+      <User
+        name={name}
+        title={title}
+        popoverContent={buttons(history, classes)}
+      />
     </div>
   );
 };

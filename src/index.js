@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { createBrowserHistory } from "history";
 
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
@@ -25,10 +26,12 @@ sagaMiddleware.run(init);
 
 store.dispatch({ type: "INIT" });
 
+const history = createBrowserHistory();
+
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App history={history} />
   </Provider>,
   rootElement
 );

@@ -163,18 +163,17 @@ const onSubmit = (
 
     reader.onabort = (r, e) => console.error("Reader aborted!", e);
     reader.onerror = (r, e) => console.error("Reader error!", e);
-    reader.onload = () => {
-      const binary = reader.result;
+    reader.onload = (r, e) => {
       const doc = {
         name: docName,
         users: selectedUsers,
         stage: 0,
         createdBy: userId,
-        content: binary
+        content: reader.result
       };
       submitDoc(doc);
     };
-    reader.readAsBinaryString(file);
+    reader.readAsArrayBuffer(file);
   });
 };
 

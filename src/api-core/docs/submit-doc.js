@@ -10,7 +10,6 @@ const submitDoc = async document => {
   const response = await fetch("http://localhost:3000/docs/", request);
 
   const doc = await response.json();
-  console.log(doc);
   return doc;
 };
 

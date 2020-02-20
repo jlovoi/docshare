@@ -84,6 +84,9 @@ const doc = createSlice({
   name: "doc",
   initialState,
   reducers: {
+    downloadFile: () => {
+      // saga
+    },
     fetchDoc: () => {
       // saga
     },
