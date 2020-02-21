@@ -8,15 +8,12 @@ const upload = async ({ buffer, id }) => {
     body: buf
   };
 
-  console.log(buf);
-
   const response = await fetch(
     `http://localhost:3000/docs/${id}/upload`,
     request
   );
 
   const doc = await response.json();
-  console.log(doc);
   return doc;
 };
 

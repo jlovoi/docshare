@@ -3,7 +3,13 @@ import Button from "@material-ui/core/Button";
 
 export default ({ downloadFile }) => {
   return (
-    <Button onClick={() => downloadFile("5e4ec40f95ebc5e67cebdb5d")}>
+    <Button
+      onClick={() =>
+        window.open(
+          "http://localhost:3000/docs/5e5009f7573ef8fe66f4ed67/download"
+        )
+      }
+    >
       Download
     </Button>
   );
