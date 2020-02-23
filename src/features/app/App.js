@@ -10,7 +10,7 @@ const App = ({ history }) => {
         <Header />
         <Route path="/doc" component={Workflow} />
         <Route path="/upload" component={Upload} />
-        <Route path="/" component={Home} />
+        <Route exact path="/" component={Home} />
       </Router>
     </AppFrame>
   );

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  usersDocs: [],
   docInfo: {
     comments: [
       {
@@ -86,6 +87,12 @@ const doc = createSlice({
   reducers: {
     downloadFile: () => {
       // saga
+    },
+    fetchUsersDocsInit: () => {
+      // saga
+    },
+    fetchUsersDocsSuccess: (state, { payload }) => {
+      state.usersDocs = payload;
     },
     fetchDoc: () => {
       // saga
