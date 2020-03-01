@@ -4,12 +4,10 @@ import Core from "./web-core";
 import initApplication from "./constants";
 
 const { fetchUser } = Core.user.actions;
-const { fetchDoc } = Core.doc.actions;
 const { fetchUsers } = Core.users.actions;
 
 function* init() {
   yield put(fetchUser("123"));
-  yield put(fetchDoc("123"));
   yield put(fetchUsers());
 }
 

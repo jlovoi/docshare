@@ -8,7 +8,7 @@ const { downloadFile } = actions;
 
 function* downloadDocx({ payload: id }) {
   try {
-    const doc = yield call(download, id);
+    yield call(download, id);
   } catch (error) {
     console.error("ERROR DOWNLOADING DOCX FILE: ", error);
   }

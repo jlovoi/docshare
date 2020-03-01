@@ -55,7 +55,7 @@ const showLines = (lines, inserts, classes) =>
 const DocInfo = ({ docInfo, insertsInfo }) => {
   const classes = useStyles();
 
-  const { lines } = docInfo;
+  const lines = docInfo.lines || [];
 
   return (
     <div className={classes.workflow}>

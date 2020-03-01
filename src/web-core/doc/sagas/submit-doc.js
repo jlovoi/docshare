@@ -20,7 +20,7 @@ function* saga({ payload }) {
         buffer: payload.content,
         id: data._id
       };
-      const uploadResponse = yield call(upload, uploadBody);
+      yield call(upload, uploadBody);
       yield put(submitDocSuccess(data));
     }
   } catch (error) {

@@ -4,11 +4,10 @@ import apiFetchDoc from "../../../api-core/docs/fetch-doc";
 
 const { fetchDoc, setDoc } = actions;
 
-function* saga({ payload }) {
+function* saga({ payload: id }) {
   try {
-    const { id } = payload;
+    const doc = yield call(apiFetchDoc, id);
 
-    const doc = yield call(apiFetchDoc, { id });
     yield put(setDoc(doc));
   } catch (error) {
     console.error("ERROR FETCHING DOC: ", error);

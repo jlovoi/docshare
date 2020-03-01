@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,6 +37,8 @@ const useStyles = makeStyles(theme => ({
 export default ({ userDocs }) => {
   const classes = useStyles();
 
+  const history = useHistory();
+
   return (
     <div className={classes.root}>
       <div className={classes.card}>
@@ -43,6 +46,12 @@ export default ({ userDocs }) => {
         {userDocs.map(doc => (
           <div key={doc._id} className={classes.doc}>
             {doc.name}
+            <Button
+              className={classes.download}
+              onClick={() => history.push(`docs/${doc._id}`)}
+            >
+              View Document
+            </Button>
             <Button
               className={classes.download}
               onClick={() =>
