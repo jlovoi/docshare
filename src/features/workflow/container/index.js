@@ -6,7 +6,12 @@ import Component from "../view";
 
 import Core from "../../../web-core";
 
-const Container = ({ users = [], docInfo = {}, insertsInfo = {} }) => {
+const Container = ({
+  users = [],
+  docInfo = {},
+  insertsInfo = {},
+  deletesInfo = {}
+}) => {
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -18,14 +23,20 @@ const Container = ({ users = [], docInfo = {}, insertsInfo = {} }) => {
   }, [docId, dispatch]);
 
   return (
-    <Component users={users} docInfo={docInfo} insertsInfo={insertsInfo} />
+    <Component
+      users={users}
+      docInfo={docInfo}
+      insertsInfo={insertsInfo}
+      deletesInfo={deletesInfo}
+    />
   );
 };
 
 const mapStateToProps = state => ({
   users: Core.doc.selectors.getDocUsers(state),
   docInfo: Core.doc.selectors.getDocInfo(state),
-  insertsInfo: Core.doc.selectors.getInsertsInfo(state)
+  insertsInfo: Core.doc.selectors.getInsertsInfo(state),
+  deletesInfo: Core.doc.selectors.getDeletesInfo(state)
 });
 
 export default connect(mapStateToProps)(Container);

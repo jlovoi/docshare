@@ -45,7 +45,13 @@ const avatars = {
   3: ray
 };
 
-const Workflow = ({ doc = {}, users = [], docInfo = {}, insertsInfo }) => {
+const Workflow = ({
+  doc = {},
+  users = [],
+  docInfo = {},
+  insertsInfo,
+  deletesInfo
+}) => {
   const classes = useStyles();
 
   return (
@@ -65,7 +71,11 @@ const Workflow = ({ doc = {}, users = [], docInfo = {}, insertsInfo }) => {
             ))}
           </div>
         </Box>
-        <DocInfo docInfo={docInfo} insertsInfo={insertsInfo} />
+        <DocInfo
+          docInfo={docInfo}
+          insertsInfo={insertsInfo}
+          deletesInfo={deletesInfo}
+        />
       </div>
     </div>
   );
