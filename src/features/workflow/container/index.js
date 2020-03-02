@@ -1,17 +1,54 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { connect, useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 import Component from "../view";
 
-import * as Core from "../../../web-core";
+import Core from "../../../web-core";
 
-const Container = ({ doc }) => {
-  console.log(doc);
-  return <Component doc={doc} users={doc.users} />;
+const Container = ({
+  document = {},
+  users = [],
+  docInfo = {},
+  insertsInfo = {},
+  deletesInfo = {},
+  approveDocument = () => {},
+  userId = ""
+}) => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  const docId = location.pathname.substring(6);
+
+  useEffect(() => {
+    dispatch(Core.doc.actions.fetchDocInfo(docId));
+    dispatch(Core.doc.actions.fetchDoc(docId));
+  }, [docId, dispatch]);
+
+  return (
+    <Component
+      document={document}
+      users={users}
+      docInfo={docInfo}
+      insertsInfo={insertsInfo}
+      deletesInfo={deletesInfo}
+      approveDocument={approveDocument}
+      userId={userId}
+    />
+  );
 };
 
 const mapStateToProps = state => ({
-  doc: Core.doc.selectors.getDocument(state)
+  document: Core.doc.selectors.getDocument(state),
+  userId: Core.user.selectors.getUserId(state),
+  users: Core.doc.selectors.getDocUsers(state),
+  docInfo: Core.doc.selectors.getDocInfo(state),
+  insertsInfo: Core.doc.selectors.getInsertsInfo(state),
+  deletesInfo: Core.doc.selectors.getDeletesInfo(state)
 });
 
-export default connect(mapStateToProps)(Container);
+const mapDispatchToProps = dispatch => ({
+  approveDocument: id => dispatch(Core.doc.actions.approveDoc(id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Container);

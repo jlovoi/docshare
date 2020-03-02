@@ -1,39 +1,39 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
 
-import { Avatar, ExpandCard } from "../../../components";
+import { Avatar } from "../../../components";
+import DocInfo from "./doc-info";
+
 import avatar from "../../../components/user/avatar.jpg";
 import brett from "../../../components/user/brett.jpg";
 import ray from "../../../components/user/ray.jpg";
 
 const useStyles = makeStyles(() => ({
-  header: {
-    height: "32px",
-    padding: "12px"
+  approve: {
+    width: "100%",
+    position: "absolute",
+    bottom: "2%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center"
   },
-  border: {
-    borderBottom: "2px solid black"
+  approveButton: {
+    backgroundColor: "darkseagreen"
   },
   box: {
     borderRadius: "8px",
     backgroundColor: "#d7d7d7",
-    height: "300px",
-    width: "90%",
+    width: "15%",
     margin: "2.5%",
-    padding: "2.5%"
+    padding: "2.5%",
+    paddingBottom: "5.5%"
   },
   group: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
-    position: "relative",
-    top: "60px"
-  },
-  cards: {
-    display: "flex",
-    flexDirection: "row",
     justifyContent: "center",
     position: "relative"
   },
@@ -41,47 +41,73 @@ const useStyles = makeStyles(() => ({
     position: "relative",
     top: "40%"
   },
-  title: {
-    fontSize: "20px",
-    fontWeight: "bold"
-  },
-  subTitle: {
-    fontSize: "14px"
+  workflowRoot: {
+    overflowY: "auto",
+    overflowX: "hidden",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "baseline",
+    height: "86vh"
   }
 }));
 
 const avatars = {
   0: avatar,
   1: brett,
-  3: ray
+  2: ray
 };
 
-const Workflow = ({ doc = {}, users = [] }) => {
+const Workflow = ({
+  approveDocument,
+  document,
+  users,
+  docInfo,
+  insertsInfo,
+  deletesInfo,
+  userId
+}) => {
   const classes = useStyles();
 
+  const currentStage =
+    document.users &&
+    document.users.findIndex(user => {
+      return document.latestApproval && document.latestApproval === user._id;
+    });
+  const isApproving =
+    currentStage && userId === document.users[currentStage + 1]._id;
+
   return (
-    <div className={classes.header}>
-      <div className={classes.border}>
-        <div className={classes.title}>Review Status</div>
-        <div className={classes.subTitle}>Awaiting Review from Frett Bene</div>
+    <div>
+      <div className={classes.workflowRoot}>
+        <Box className={classes.box}>
+          <div className={classes.group}>
+            {users.map((user, index) => (
+              <Avatar
+                key={user._id}
+                avatar={avatars[index]}
+                check={index <= currentStage}
+                first={index === 0}
+                fullName={user.firstName + " " + user.lastName}
+                title={user.title}
+              />
+            ))}
+          </div>
+        </Box>
+        <DocInfo
+          docInfo={docInfo}
+          insertsInfo={insertsInfo}
+          deletesInfo={deletesInfo}
+        />
       </div>
-      <Box className={classes.box}>
-        <div className={classes.group}>
-          {users.map((user, index) => (
-            <Avatar
-              key={user._id}
-              avatar={avatars[index]}
-              check={index <= doc.stage}
-              first={index === 0}
-              fullName={user.firstName + " " + user.lastName}
-            />
-          ))}
-        </div>
-      </Box>
-      <div className={classes.cards}>
-        <ExpandCard />
-        <ExpandCard />
-        <ExpandCard />
+      <div className={classes.approve}>
+        <Button
+          disabled={!isApproving}
+          className={classes.approveButton}
+          onClick={() => approveDocument(document._id)}
+        >
+          Approve
+        </Button>
       </div>
     </div>
   );

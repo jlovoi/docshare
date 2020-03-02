@@ -1,14 +1,16 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
 import { AppFrame } from "../../components";
-import { Header, Workflow } from "../index";
+import { Header, Home, Upload, Workflow } from "../index";
 
-const App = () => {
+const App = ({ history }) => {
   return (
     <AppFrame>
-      <Header />
-      <Router>
-        <Route path="/" component={Workflow} />
+      <Router history={history}>
+        <Header />
+        <Route path="/docs" component={Workflow} />
+        <Route path="/upload" component={Upload} />
+        <Route exact path="/" component={Home} />
       </Router>
     </AppFrame>
   );
