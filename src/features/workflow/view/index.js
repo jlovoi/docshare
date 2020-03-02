@@ -1,14 +1,27 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
 
 import { Avatar } from "../../../components";
 import DocInfo from "./doc-info";
+
 import avatar from "../../../components/user/avatar.jpg";
 import brett from "../../../components/user/brett.jpg";
 import ray from "../../../components/user/ray.jpg";
 
 const useStyles = makeStyles(() => ({
+  approve: {
+    width: "100%",
+    position: "absolute",
+    bottom: "2%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center"
+  },
+  approveButton: {
+    backgroundColor: "darkseagreen"
+  },
   box: {
     borderRadius: "8px",
     backgroundColor: "#d7d7d7",
@@ -42,7 +55,7 @@ const useStyles = makeStyles(() => ({
 const avatars = {
   0: avatar,
   1: brett,
-  3: ray
+  2: ray
 };
 
 const Workflow = ({
@@ -76,6 +89,9 @@ const Workflow = ({
           insertsInfo={insertsInfo}
           deletesInfo={deletesInfo}
         />
+      </div>
+      <div className={classes.approve}>
+        <Button className={classes.approveButton}>Approve</Button>
       </div>
     </div>
   );
