@@ -7,8 +7,15 @@ import Core from "../../../web-core";
 const { getFullName, getTitle } = Core.user.selectors;
 const { getNextApprover } = Core.doc.selectors;
 
-const Container = ({ name, title, nextApprover }) => {
-  return <Component name={name} title={title} nextApprover={nextApprover} />;
+const Container = ({ name, title, nextApprover, handleLogout }) => {
+  return (
+    <Component
+      name={name}
+      title={title}
+      nextApprover={nextApprover}
+      handleLogout={handleLogout}
+    />
+  );
 };
 
 const mapStateToProps = state => ({
