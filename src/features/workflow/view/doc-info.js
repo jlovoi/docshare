@@ -27,7 +27,6 @@ const useStyles = makeStyles(theme => ({
 
 const showLines = (lines, inserts, deletes, classes) =>
   lines.map((line, index) => {
-    console.log(line);
     if (inserts[line]) {
       return (
         <div className={classes.line} key={`line-${index}`}>

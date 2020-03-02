@@ -59,13 +59,23 @@ const avatars = {
 };
 
 const Workflow = ({
-  doc = {},
-  users = [],
-  docInfo = {},
+  approveDocument,
+  document,
+  users,
+  docInfo,
   insertsInfo,
-  deletesInfo
+  deletesInfo,
+  userId
 }) => {
   const classes = useStyles();
+
+  const currentStage =
+    document.users &&
+    document.users.findIndex(user => {
+      return document.latestApproval && document.latestApproval === user._id;
+    });
+  const isApproving =
+    currentStage && userId === document.users[currentStage + 1]._id;
 
   return (
     <div>
@@ -76,7 +86,7 @@ const Workflow = ({
               <Avatar
                 key={user._id}
                 avatar={avatars[index]}
-                check={index <= doc.stage}
+                check={index <= currentStage}
                 first={index === 0}
                 fullName={user.firstName + " " + user.lastName}
                 title={user.title}
@@ -91,7 +101,13 @@ const Workflow = ({
         />
       </div>
       <div className={classes.approve}>
-        <Button className={classes.approveButton}>Approve</Button>
+        <Button
+          disabled={!isApproving}
+          className={classes.approveButton}
+          onClick={() => approveDocument(document._id)}
+        >
+          Approve
+        </Button>
       </div>
     </div>
   );

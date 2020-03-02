@@ -3,6 +3,7 @@ import { sagas as docSagas } from "./doc";
 import fetchAllUsers from "./users/sagas";
 
 const {
+  approve,
   fetchDoc,
   fetchDocInfo,
   submitDoc,
@@ -11,6 +12,7 @@ const {
 } = docSagas;
 
 export default [
+  approve,
   fetchUser,
   fetchDoc,
   fetchDocInfo,

@@ -7,10 +7,13 @@ import Component from "../view";
 import Core from "../../../web-core";
 
 const Container = ({
+  document = {},
   users = [],
   docInfo = {},
   insertsInfo = {},
-  deletesInfo = {}
+  deletesInfo = {},
+  approveDocument = () => {},
+  userId = ""
 }) => {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -24,19 +27,28 @@ const Container = ({
 
   return (
     <Component
+      document={document}
       users={users}
       docInfo={docInfo}
       insertsInfo={insertsInfo}
       deletesInfo={deletesInfo}
+      approveDocument={approveDocument}
+      userId={userId}
     />
   );
 };
 
 const mapStateToProps = state => ({
+  document: Core.doc.selectors.getDocument(state),
+  userId: Core.user.selectors.getUserId(state),
   users: Core.doc.selectors.getDocUsers(state),
   docInfo: Core.doc.selectors.getDocInfo(state),
   insertsInfo: Core.doc.selectors.getInsertsInfo(state),
   deletesInfo: Core.doc.selectors.getDeletesInfo(state)
 });
 
-export default connect(mapStateToProps)(Container);
+const mapDispatchToProps = dispatch => ({
+  approveDocument: id => dispatch(Core.doc.actions.approveDoc(id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Container);

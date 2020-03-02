@@ -85,6 +85,12 @@ const doc = createSlice({
   name: "doc",
   initialState,
   reducers: {
+    approveDoc: () => {
+      // saga
+    },
+    approveDocSuccess: (state, { payload: id }) => {
+      state.document.latestApproval = id;
+    },
     downloadFile: () => {
       // saga
     },

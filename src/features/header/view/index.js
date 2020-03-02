@@ -57,7 +57,7 @@ const buttons = (history, classes) => [
   </Button>
 ];
 
-const Component = ({ name, title, awaitingUser }) => {
+const Component = ({ name, title, nextApprover }) => {
   const classes = useStyles();
 
   const history = useHistory();
@@ -67,7 +67,9 @@ const Component = ({ name, title, awaitingUser }) => {
       <div className={classes.header}>
         <div className={classes.title}>Review Status</div>
         <div className={classes.subTitle}>
-          {`Awaiting Review from ${awaitingUser || "Frett Bene"}`}
+          {`Awaiting Review from ${nextApprover.firstName +
+            " " +
+            nextApprover.lastName}`}
         </div>
       </div>
       <User

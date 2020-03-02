@@ -167,7 +167,7 @@ const onSubmit = (
       const doc = {
         name: docName,
         users: selectedUsers,
-        stage: 0,
+        latestApproval: null,
         createdBy: userId,
         content: reader.result
       };
