@@ -1,6 +1,6 @@
-import fetchUser from "./user/sagas";
 import { sagas as docSagas } from "./doc";
-import fetchAllUsers from "./users/sagas";
+import { sagas as usersSagas } from "./users/";
+import { sagas as userSagas } from "./user";
 
 const {
   approve,
@@ -11,9 +11,14 @@ const {
   fetchUsersDocs
 } = docSagas;
 
+const { fetchUser, fetchUserByUsername } = userSagas;
+
+const { fetchAllUsers } = usersSagas;
+
 export default [
   approve,
   fetchUser,
+  fetchUserByUsername,
   fetchDoc,
   fetchDocInfo,
   download,

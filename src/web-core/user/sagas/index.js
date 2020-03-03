@@ -1,3 +1,4 @@
-import fetchUserSaga from "./fetch-user";
+import fetchUser from "./fetch-user";
+import fetchUserByUsername from "./fetch-user-by-username";
 
-export default fetchUserSaga;
+export { fetchUser, fetchUserByUsername };

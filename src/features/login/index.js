@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Textfield from "@material-ui/core/Textfield";
-import { resolve } from "upath";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,7 +15,6 @@ const useStyles = makeStyles(theme => ({
   },
   box: {
     width: "60%",
-    height: "300px",
     padding: "48px",
     borderRadius: "8px",
     backgroundColor: "#d7d7d7",
@@ -24,15 +23,37 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "flex-start",
     alignItems: "center"
   },
+  group: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: "18px"
+  },
   buttonGroup: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center"
   },
+  inputGroup: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "500px"
+  },
+  divider: {
+    border: ".5px solid black",
+    height: "0px",
+    width: "200px"
+  },
+  small: {
+    fontSize: "10px"
+  },
   input: {
     width: "50%",
-    margin: "18px"
+    margin: "9px"
   },
   login: {
     backgroundColor: "darkseagreen",
@@ -46,7 +67,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const register = (username, password, setRegistered) => {
+const register = (
+  username,
+  password,
+  firstName,
+  lastName,
+  email,
+  title,
+  setRegistered,
+  setError
+) => {
   fetch(`http://localhost:3000/register`, {
     method: "POST",
     headers: {
@@ -54,24 +84,45 @@ const register = (username, password, setRegistered) => {
     },
     body: JSON.stringify({
       username,
-      password
+      password,
+      firstName,
+      lastName,
+      email,
+      title
     })
   }).then(res => {
-    return resolve(res);
+    if (res.ok) {
+      setRegistered(true);
+      setError(false);
+    } else {
+      setError(true);
+      setRegistered(false);
+    }
+    return res;
   });
 };
 
 const LogIn = ({ history, handleLogin }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
+  const [error, setError] = useState(false);
   const [registered, setRegistered] = useState(false);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [title, setTitle] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
+  const loginDisabled = !userName || !password;
+  const regDisabled =
+    loginDisabled || !email || !title || !firstName || !lastName;
 
   return (
     <div className={classes.root}>
       <div className={classes.box}>
-        Register or Log In!
+        Log In
         <Textfield
           className={classes.input}
           value={userName}
@@ -87,20 +138,72 @@ const LogIn = ({ history, handleLogin }) => {
         />
         <div className={classes.buttonGroup}>
           <Button
-            className={classes.register}
-            onClick={() => register(userName, password, setRegistered)}
-          >
-            Register
-          </Button>
-          <Button
             className={classes.login}
             onClick={() => {
-              handleLogin(userName, password);
+              handleLogin(userName, password, dispatch);
               history.push("/home");
             }}
+            disabled={loginDisabled}
           >
             Log In
           </Button>
+        </div>
+        <div className={classes.group}>
+          <div className={classes.divider} />
+          <div className={classes.small}>OR</div>
+          <div className={classes.divider} />
+        </div>
+        Fill in the Rest to Register
+        <div className={classes.inputGroup}>
+          <Textfield
+            className={classes.input}
+            value={firstName}
+            label="First Name"
+            onChange={e => setFirstName(e.target.value)}
+          />
+          <Textfield
+            className={classes.input}
+            value={lastName}
+            label="Last Name"
+            onChange={e => setLastName(e.target.value)}
+          />
+        </div>
+        <div className={classes.inputGroup}>
+          <Textfield
+            className={classes.input}
+            value={email}
+            label="Email"
+            onChange={e => setEmail(e.target.value)}
+          />
+          <Textfield
+            className={classes.input}
+            value={title}
+            label="Title / Company Role"
+            onChange={e => setTitle(e.target.value)}
+          />
+        </div>
+        <Button
+          className={classes.register}
+          onClick={() =>
+            register(
+              userName,
+              password,
+              firstName,
+              lastName,
+              email,
+              title,
+              setRegistered,
+              setError
+            )
+          }
+          disabled={regDisabled}
+        >
+          Register
+        </Button>
+        <div className={classes.buttonGroup}>
+          {registered &&
+            "Successfully Registered! Now login with those same credentials"}
+          {error && "Could not register that username, please try another"}
         </div>
       </div>
     </div>

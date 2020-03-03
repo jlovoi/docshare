@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import AuthHelperMethods from "./authHelpers";
 import { LogIn } from "../features";
-import user from "../api-core/user";
+import Core from "../web-core";
+
+import LoadUser from "./LoadUser";
 
 export default ChildComponent => {
   const Auth = new AuthHelperMethods();
@@ -12,10 +14,13 @@ export default ChildComponent => {
       loaded: false
     };
 
-    handleLogin = async (username, password) => {
+    handleLogin = async (username, password, dispatch) => {
       const logged = await Auth.login(username, password);
       if (logged.success) {
-        this.setState({ confirm: Auth.getConfirm() });
+        this.props.history.push("/home");
+        const confirm = Auth.getConfirm();
+        this.setState({ confirm });
+        dispatch(Core.auth.actions.setConfirmation(confirm));
       }
     };
 
@@ -44,14 +49,17 @@ export default ChildComponent => {
     }
 
     render() {
+      console.log("confirm", this.state.confirm);
       if (this.state.loaded === true) {
         if (this.state.confirm) {
           return (
-            <ChildComponent
-              history={this.props.history}
-              confirm={this.state.confirm}
-              handleLogout={this.handleLogout}
-            />
+            <LoadUser confirmation={this.state.confirm}>
+              <ChildComponent
+                history={this.props.history}
+                confirm={this.state.confirm}
+                handleLogout={this.handleLogout}
+              />
+            </LoadUser>
           );
         } else {
           return (
