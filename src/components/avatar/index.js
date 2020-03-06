@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Popover from "@material-ui/core/Popover";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
