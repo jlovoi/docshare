@@ -3,7 +3,7 @@ const fetchDocInfo = async id => {
     "Content-Type": "application/json"
   };
 
-  const docInfo = await fetch(`http://localhost:3000/docs/${id}/info`, headers);
+  const docInfo = await fetch(`http://localhost:8000/docs/${id}/info`, headers);
 
   const json = await docInfo.json();
 

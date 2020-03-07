@@ -4,7 +4,7 @@ const fetchUserByUsername = async username => {
   };
 
   const user = await fetch(
-    `http://localhost:3000/users/username/${username}`,
+    `http://localhost:8000/users/username/${username}`,
     headers
   );
 

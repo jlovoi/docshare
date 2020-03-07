@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -77,7 +77,7 @@ const register = (
   setRegistered,
   setError
 ) => {
-  fetch(`http://localhost:3000/register`, {
+  fetch(`http://localhost:8000/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -114,6 +114,15 @@ const LogIn = ({ history, handleLogin }) => {
   const [title, setTitle] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+
+  useEffect(() => {
+    fetch(`http://localhost:8000/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  }, []);
 
   const loginDisabled = !userName || !password;
   const regDisabled =

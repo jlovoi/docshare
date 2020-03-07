@@ -8,7 +8,7 @@ export default ({ confirmation, children }) => {
 
   useEffect(() => {
     dispatch(Core.auth.actions.setConfirmation(confirmation));
-  }, [confirmation]);
+  }, [confirmation, dispatch]);
 
   return <div>{children}</div>;
 };

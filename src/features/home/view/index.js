@@ -55,7 +55,7 @@ export default ({ userDocs }) => {
             <Button
               className={classes.download}
               onClick={() =>
-                window.open(`http://localhost:3000/docs/${doc._id}/download`)
+                window.open(`http://localhost:8000/docs/${doc._id}/download`)
               }
             >
               Download
