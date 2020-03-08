@@ -3,7 +3,7 @@ const fetchUser = async id => {
     "Content-Type": "application/json"
   };
 
-  const user = await fetch(`http://localhost:8000/users/${id}`, headers);
+  const user = await fetch(`http://64.227.25.114:8000/users/${id}`, headers);
 
   return await user.json();
 };

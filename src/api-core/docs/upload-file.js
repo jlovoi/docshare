@@ -9,7 +9,7 @@ const upload = async ({ buffer, id }) => {
   };
 
   const response = await fetch(
-    `http://localhost:8000/docs/${id}/upload`,
+    `http://64.227.25.114:8000/docs/${id}/upload`,
     request
   );
 

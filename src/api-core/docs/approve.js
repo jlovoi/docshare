@@ -7,7 +7,7 @@ const approve = async ({ userId, docId }) => {
   };
 
   const response = await fetch(
-    `http://localhost:8000/docs/${docId}/approve/${userId}`,
+    `http://64.227.25.114:8000/docs/${docId}/approve/${userId}`,
     request
   );
 

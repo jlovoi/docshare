@@ -4,7 +4,10 @@ const download = async id => {
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
   };
 
-  const doc = await fetch(`http://localhost:8000/docs/${id}/download`, headers);
+  const doc = await fetch(
+    `http://64.227.25.114:8000/docs/${id}/download`,
+    headers
+  );
 
   return await doc;
 };

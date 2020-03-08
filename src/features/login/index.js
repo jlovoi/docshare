@@ -77,7 +77,7 @@ const register = (
   setRegistered,
   setError
 ) => {
-  fetch(`http://localhost:8000/register`, {
+  fetch(`http://64.227.25.114:8000/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -116,7 +116,7 @@ const LogIn = ({ history, handleLogin }) => {
   const [lastName, setLastName] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:8000/`, {
+    fetch(`http://64.227.25.114:8000/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
