@@ -13,8 +13,7 @@ const upload = async ({ buffer, id }) => {
     request
   );
 
-  const doc = await response.json();
-  return doc;
+  return response;
 };
 
 export default upload;

@@ -26,7 +26,7 @@ sagaMiddleware.run(init);
 
 store.dispatch({ type: "INIT" });
 
-const history = createBrowserHistory();
+export const history = createBrowserHistory();
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(

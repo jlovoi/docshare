@@ -17,10 +17,10 @@ export default ChildComponent => {
     handleLogin = async (username, password, dispatch) => {
       const logged = await Auth.login(username, password);
       if (logged.success) {
-        this.props.history.push("/home");
         const confirm = Auth.getConfirm();
         this.setState({ confirm });
         dispatch(Core.auth.actions.setConfirmation(confirm));
+        this.props.history.push("/");
       }
     };
 

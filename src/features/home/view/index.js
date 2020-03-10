@@ -16,8 +16,7 @@ const useStyles = makeStyles(theme => ({
     width: "60%",
     padding: "16px",
     margin: "24px",
-    borderRadius: "8px",
-    maxHeight: "400px"
+    borderRadius: "8px"
   },
   doc: {
     marginTop: "18px",
@@ -31,6 +30,10 @@ const useStyles = makeStyles(theme => ({
   download: {
     backgroundColor: "#11c178",
     color: "#ffffff"
+  },
+  text: {
+    margin: "24px",
+    alignText: "center"
   }
 }));
 
@@ -64,6 +67,10 @@ export default ({ userDocs }) => {
             </Button>
           </div>
         ))}
+        <div className={classes.text}>
+          {!userDocs.length &&
+            "It seems you're not an approver of any documents... Go create one!"}
+        </div>
       </div>
     </div>
   );

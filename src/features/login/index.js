@@ -150,7 +150,6 @@ const LogIn = ({ history, handleLogin }) => {
             className={classes.login}
             onClick={() => {
               handleLogin(userName, password, dispatch);
-              history.push("/home");
             }}
             disabled={loginDisabled}
           >

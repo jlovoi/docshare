@@ -64,11 +64,15 @@ const Component = ({ name, title, nextApprover, handleLogout }) => {
   return (
     <div className={classes.flex}>
       <div className={classes.header}>
-        <div className={classes.title}>Review Status</div>
+        <div className={classes.title}>
+          {(nextApprover.firstName && "Review Status") || "DocShare"}
+        </div>
         <div className={classes.subTitle}>
-          {`Awaiting Review from ${nextApprover.firstName +
-            " " +
-            nextApprover.lastName}`}
+          {(nextApprover.firstName &&
+            `Awaiting Review from ${nextApprover.firstName +
+              " " +
+              nextApprover.lastName}`) ||
+            "Click avatar for some actions"}
         </div>
       </div>
       <User

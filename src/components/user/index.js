@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Popover from "@material-ui/core/Popover";
 
-import SampleAvatar from "./avatar.jpg";
+// import SampleAvatar from "./avatar.jpg";
 
 const useStyles = makeStyles(() => ({
   user: {
@@ -70,7 +70,7 @@ const User = ({ name, title, popoverContent }) => {
           {name}
           <div className={classes.title}>{title}</div>
         </div>
-        <Avatar className={classes.avatar} src={SampleAvatar} />
+        <Avatar className={classes.avatar} />
         <Popover
           className={classes.popover}
           open={Boolean(anchorEl)}

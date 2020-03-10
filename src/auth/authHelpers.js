@@ -69,8 +69,12 @@ export default class AuthHelperMethods {
       ...options
     })
       .then(this._checkStatus)
-      .then(response => {
-        return response.json();
+      .then(async response => {
+        if (response.ok) {
+          const json = await response.json();
+          return json;
+        }
+        return response;
       });
   };
 
@@ -80,9 +84,7 @@ export default class AuthHelperMethods {
       // Success status lies between 200 to 300
       return response;
     } else {
-      var error = new Error(response.statusText);
-      error.response = response;
-      throw error;
+      return { ok: false, status: 401 };
     }
   };
 }
