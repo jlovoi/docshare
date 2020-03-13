@@ -82,16 +82,19 @@ const Workflow = ({
       <div className={classes.workflowRoot}>
         <Box className={classes.box}>
           <div className={classes.group}>
-            {users.map((user, index) => (
-              <Avatar
-                key={user._id}
-                avatar={avatars[index]}
-                check={index <= currentStage}
-                first={index === 0}
-                fullName={user.firstName + " " + user.lastName}
-                title={user.title}
-              />
-            ))}
+            {users.map(
+              (user, index) =>
+                user && (
+                  <Avatar
+                    key={user._id}
+                    // avatar={avatars[index]}
+                    check={index <= currentStage}
+                    first={index === 0}
+                    fullName={user.firstName + " " + user.lastName}
+                    title={user.title}
+                  />
+                )
+            )}
           </div>
         </Box>
         <DocInfo
