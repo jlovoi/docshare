@@ -11,7 +11,8 @@ export default ChildComponent => {
   return class AuthWrapped extends Component {
     state = {
       confirm: null,
-      loaded: false
+      loaded: false,
+      logged: false
     };
 
     handleLogin = async (username, password, dispatch) => {
@@ -21,6 +22,8 @@ export default ChildComponent => {
         this.setState({ confirm });
         dispatch(Core.auth.actions.setConfirmation(confirm));
         this.props.history.push("/");
+        this.setState({ logged: true });
+        setTimeout(() => window.location.reload(), 500);
       }
     };
 
