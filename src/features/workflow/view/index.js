@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 
-import { Avatar } from "../../../components";
+import { Avatar, UploadModal } from "../../../components";
 import DocInfo from "./doc-info";
 
-import avatar from "../../../components/user/avatar.jpg";
-import brett from "../../../components/user/brett.jpg";
-import ray from "../../../components/user/ray.jpg";
+import Download from "@material-ui/icons/GetApp";
 
 const useStyles = makeStyles(() => ({
   approve: {
@@ -20,7 +18,16 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center"
   },
   approveButton: {
-    backgroundColor: "darkseagreen"
+    backgroundColor: "darkseagreen",
+    margin: "5px"
+  },
+  downloadButton: {
+    backgroundColor: "darkgrey",
+    margin: "5px"
+  },
+  uploadButton: {
+    backgroundColor: "lightsteelblue",
+    margin: "5px"
   },
   box: {
     borderRadius: "8px",
@@ -52,10 +59,12 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const avatars = {
-  0: avatar,
-  1: brett,
-  2: ray
+const onCancel = (files, setFiles) => name => {
+  if (files.length === 1) {
+    setFiles(null);
+  } else {
+    setFiles(files.filter(f => f.name !== name));
+  }
 };
 
 const Workflow = ({
@@ -69,13 +78,17 @@ const Workflow = ({
 }) => {
   const classes = useStyles();
 
+  const [files, setFiles] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+
   const currentStage =
     document.users &&
     document.users.findIndex(user => {
       return document.latestApproval && document.latestApproval === user._id;
     });
+
   const isApproving =
-    currentStage && userId === document.users[currentStage + 1]._id;
+    currentStage >= 0 && userId === document.users[currentStage + 1]._id;
 
   return (
     <div>
@@ -89,6 +102,7 @@ const Workflow = ({
                     key={user._id}
                     // avatar={avatars[index]}
                     check={index <= currentStage}
+                    fillLine={index <= currentStage + 1}
                     first={index === 0}
                     fullName={user.firstName + " " + user.lastName}
                     title={user.title}
@@ -105,13 +119,39 @@ const Workflow = ({
       </div>
       <div className={classes.approve}>
         <Button
+          className={classes.uploadButton}
+          onClick={() => {
+            setOpenModal(true);
+          }}
+        >
+          Upload New Version
+        </Button>
+        <Button
           disabled={!isApproving}
           className={classes.approveButton}
           onClick={() => approveDocument(document._id)}
         >
           Approve
         </Button>
+        <Button
+          className={classes.downloadButton}
+          onClick={() =>
+            window.open(
+              `${process.env.REACT_APP_API}/docs/${document._id}/download`
+            )
+          }
+        >
+          <Download />
+        </Button>
       </div>
+      {openModal && (
+        <UploadModal
+          files={files}
+          setFiles={setFiles}
+          onCancel={onCancel(files, setFiles)}
+          onClose={() => setOpenModal(false)}
+        />
+      )}
     </div>
   );
 };

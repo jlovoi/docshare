@@ -59,7 +59,7 @@ export default ({ userDocs }) => {
               className={classes.download}
               onClick={() =>
                 window.open(
-                  `http://64.227.25.114:8000/docs/${doc._id}/download`
+                  `${process.env.REACT_APP_API}/docs/${doc._id}/download`
                 )
               }
             >

@@ -71,10 +71,10 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const showLine = (first, check, classes) => {
-  if (!first && check) {
+const showLine = (first, fillLine, classes) => {
+  if (!first && fillLine) {
     return <div className={classes.line} />;
-  } else if (!first && !check) {
+  } else if (!first && !fillLine) {
     return <div className={classes.dashedLine} />;
   }
   return <div className={classes.dummyLine} />;
@@ -83,6 +83,7 @@ const showLine = (first, check, classes) => {
 const Component = ({
   avatar,
   check = false,
+  fillLine = false,
   first = false,
   fullName = "Joel Ovoi",
   title
@@ -115,7 +116,7 @@ const Component = ({
           <div className={classes.title}>{title}</div>
         </div>
       </Popover>
-      {showLine(first, check, classes)}
+      {showLine(first, fillLine, classes)}
     </div>
   );
 };

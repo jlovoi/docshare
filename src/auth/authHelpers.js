@@ -2,7 +2,7 @@ import decode from "jwt-decode";
 
 export default class AuthHelperMethods {
   constructor(domain) {
-    this.domain = "http://64.227.25.114:8000";
+    this.domain = `${process.env.REACT_APP_API}`;
   }
 
   login = (username, password) => {

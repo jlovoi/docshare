@@ -4,7 +4,7 @@ const fetchUserByUsername = async username => {
   };
 
   const user = await fetch(
-    `http://64.227.25.114:8000/users/username/${username}`,
+    `${process.env.REACT_APP_API}/users/username/${username}`,
     headers
   );
 

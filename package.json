@@ -22,7 +22,8 @@
     "reselect": "^4.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start:dev": "REACT_APP_API=http://localhost:8000 react-scripts start",
+    "start:prod": "REACT_APP_API=http://64.227.25.114:8000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

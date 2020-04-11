@@ -77,7 +77,7 @@ const register = (
   setRegistered,
   setError
 ) => {
-  fetch(`http://64.227.25.114:8000/register`, {
+  fetch(`${process.env.REACT_APP_API}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -116,7 +116,7 @@ const LogIn = ({ history, handleLogin }) => {
   const [lastName, setLastName] = useState("");
 
   useEffect(() => {
-    fetch(`http://64.227.25.114:8000/`, {
+    fetch(`${process.env.REACT_APP_API}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

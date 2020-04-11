@@ -3,7 +3,10 @@ const allByUser = async id => {
     "Content-Type": "application/json"
   };
 
-  const doc = await fetch(`http://64.227.25.114:8000/docs/user/${id}`, headers);
+  const doc = await fetch(
+    `${process.env.REACT_APP_API}/docs/user/${id}`,
+    headers
+  );
 
   return await doc.json();
 };
