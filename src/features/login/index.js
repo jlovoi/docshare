@@ -124,7 +124,7 @@ const LogIn = ({ history, handleLogin }) => {
     });
   }, []);
 
-  const loginDisabled = !userName || !password;
+  const loginDisabled = !userName || !password || password.length < 6;
   const regDisabled =
     loginDisabled || !email || !title || !firstName || !lastName;
 

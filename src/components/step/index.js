@@ -62,9 +62,11 @@ export default ({
     <div className={classes.stepBox}>
       <div className={classes.flex}>
         <div className={classes.step}>{`Step ${step}`}</div>
-        <IconButton className={classes.marginLeft} onClick={onClose}>
-          <CancelIcon />
-        </IconButton>
+        {onClose && (
+          <IconButton className={classes.marginLeft} onClick={onClose}>
+            <CancelIcon />
+          </IconButton>
+        )}
       </div>
       <div className={classes.description}>{description}</div>
       {content}
