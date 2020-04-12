@@ -15,4 +15,4 @@ COPY . /srv/app/directory/docshare
 
 EXPOSE 3000
 
-CMD ["yarn", "start"]
+CMD ["yarn", "start:prod"]
