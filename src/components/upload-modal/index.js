@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Input from "@material-ui/core/Input";
 import { useDropzone } from "react-dropzone";
 
 import CancelIcon from "@material-ui/icons/Cancel";
@@ -63,33 +61,7 @@ const showFiles = (files, onCancel, classes) => {
   );
 };
 
-const onSubmit = (
-  droppedFiles,
-  docName,
-  userId,
-  selectedUsers,
-  submitDoc
-) => () => {
-  droppedFiles.forEach(file => {
-    const reader = new FileReader();
-
-    reader.onabort = (r, e) => console.error("Reader aborted!", e);
-    reader.onerror = (r, e) => console.error("Reader error!", e);
-    reader.onload = (r, e) => {
-      const doc = {
-        name: docName,
-        users: selectedUsers,
-        latestApproval: null,
-        createdBy: userId,
-        content: reader.result
-      };
-      submitDoc(doc);
-    };
-    reader.readAsArrayBuffer(file);
-  });
-};
-
-export default ({ files, setFiles, submitDoc, onCancel, onClose }) => {
+export default ({ files, setFiles, onCancel, onClose, onAccept }) => {
   const classes = useStyles();
 
   const onDrop = droppedFiles => {
@@ -120,6 +92,8 @@ export default ({ files, setFiles, submitDoc, onCancel, onClose }) => {
           }
           error={notDocx && "Only .docx files are supported!"}
           onClose={onClose}
+          disabled={disabled}
+          onAccept={onAccept}
         />
       </div>
     </div>

@@ -13,7 +13,8 @@ const Container = ({
   insertsInfo = {},
   deletesInfo = {},
   approveDocument = () => {},
-  userId = ""
+  userId = "",
+  patchFile = () => {}
 }) => {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -34,6 +35,7 @@ const Container = ({
       deletesInfo={deletesInfo}
       approveDocument={approveDocument}
       userId={userId}
+      patchFile={patchFile}
     />
   );
 };
@@ -48,7 +50,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  approveDocument: id => dispatch(Core.doc.actions.approveDoc(id))
+  approveDocument: id => dispatch(Core.doc.actions.approveDoc(id)),
+  patchFile: doc => dispatch(Core.doc.actions.patchFileInit(doc))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container);

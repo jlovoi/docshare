@@ -8,7 +8,8 @@ const {
   fetchDocInfo,
   submitDoc,
   download,
-  fetchUsersDocs
+  fetchUsersDocs,
+  patchFile
 } = docSagas;
 
 const { fetchUser, fetchUserByUsername } = userSagas;
@@ -24,5 +25,6 @@ export default [
   download,
   submitDoc,
   fetchAllUsers,
-  fetchUsersDocs
+  fetchUsersDocs,
+  patchFile
 ];

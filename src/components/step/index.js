@@ -1,10 +1,16 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 
 import CancelIcon from "@material-ui/icons/Cancel";
 
 const useStyles = makeStyles(theme => ({
+  button: {
+    backgroundColor: "darkseagreen",
+    textTransform: "none",
+    marginTop: "32px"
+  },
   description: {
     fontSize: "14px"
   },
@@ -30,12 +36,27 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "row"
   },
+  center: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
+  },
   marginLeft: {
     marginLeft: "auto"
   }
 }));
 
-export default ({ step, description, content, error, subContent, onClose }) => {
+export default ({
+  step,
+  description,
+  content,
+  error,
+  subContent,
+  onClose,
+  onAccept,
+  disabled
+}) => {
   const classes = useStyles();
   return (
     <div className={classes.stepBox}>
@@ -49,6 +70,17 @@ export default ({ step, description, content, error, subContent, onClose }) => {
       {content}
       {error && <div className={classes.error}>{error}</div>}
       {subContent}
+      <div className={classes.center}>
+        {onAccept && (
+          <Button
+            className={classes.button}
+            disabled={disabled}
+            onClick={onAccept()}
+          >
+            Accept File
+          </Button>
+        )}
+      </div>
     </div>
   );
 };

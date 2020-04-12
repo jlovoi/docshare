@@ -67,6 +67,23 @@ const onCancel = (files, setFiles) => name => {
   }
 };
 
+const onPatchFile = (droppedFiles, id, patchFile) => () => {
+  droppedFiles.forEach(file => {
+    const reader = new FileReader();
+
+    reader.onabort = (r, e) => console.error("Reader aborted!", e);
+    reader.onerror = (r, e) => console.error("Reader error!", e);
+    reader.onload = (r, e) => {
+      const doc = {
+        content: reader.result,
+        id
+      };
+      patchFile(doc);
+    };
+    reader.readAsArrayBuffer(file);
+  });
+};
+
 const Workflow = ({
   approveDocument,
   document,
@@ -74,7 +91,8 @@ const Workflow = ({
   docInfo,
   insertsInfo,
   deletesInfo,
-  userId
+  userId,
+  patchFile
 }) => {
   const classes = useStyles();
 
@@ -149,7 +167,11 @@ const Workflow = ({
           files={files}
           setFiles={setFiles}
           onCancel={onCancel(files, setFiles)}
-          onClose={() => setOpenModal(false)}
+          onClose={() => {
+            setOpenModal(false);
+            setFiles(null);
+          }}
+          onAccept={() => onPatchFile(files, document._id, patchFile)}
         />
       )}
     </div>

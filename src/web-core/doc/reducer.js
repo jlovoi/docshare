@@ -103,6 +103,9 @@ const doc = createSlice({
     fetchDoc: () => {
       // saga
     },
+    patchFileInit: () => {
+      //saga
+    },
     setDoc: (state, action) => {
       state.document = action.payload;
     },

@@ -9,8 +9,6 @@ const fetchDocInfo = async id => {
       headers
     );
 
-    console.log(docInfo);
-
     const json = await docInfo.json();
 
     return JSON.parse(json);
