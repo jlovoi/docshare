@@ -4,7 +4,10 @@ const download = async id => {
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
   };
 
-  const doc = await fetch(`http://localhost:3000/docs/${id}/download`, headers);
+  const doc = await fetch(
+    `${process.env.REACT_APP_API}/docs/${id}/download`,
+    headers
+  );
 
   return await doc;
 };

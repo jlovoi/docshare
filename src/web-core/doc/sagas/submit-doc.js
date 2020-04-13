@@ -1,4 +1,6 @@
 import { call, put, takeEvery } from "redux-saga/effects";
+import { history } from "../../../index";
+
 import { actions } from "../reducer";
 import API from "../../../api-core";
 
@@ -22,6 +24,7 @@ function* saga({ payload }) {
       };
       yield call(upload, uploadBody);
       yield put(submitDocSuccess(data));
+      yield put(history.push("/"));
     }
   } catch (error) {
     console.error("ERROR FETCHING DOC: ", error);

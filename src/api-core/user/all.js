@@ -3,7 +3,7 @@ const fetchAllUsers = async () => {
     "Content-Type": "application/json"
   };
 
-  const users = await fetch("http://localhost:3000/users/", headers);
+  const users = await fetch(`${process.env.REACT_APP_API}/users/`, headers);
 
   return await users.json();
 };

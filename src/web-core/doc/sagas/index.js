@@ -4,6 +4,7 @@ import fetchDocInfo from "./fetch-doc-info";
 import submitDoc from "./submit-doc";
 import download from "./download";
 import fetchUsersDocs from "./fetch-users-docs";
+import patchFile from "./patch-file";
 
 export default {
   approve,
@@ -11,5 +12,6 @@ export default {
   fetchDocInfo,
   fetchUsersDocs,
   submitDoc,
-  download
+  download,
+  patchFile
 };

@@ -1,7 +1,7 @@
-const upload = async ({ buffer, id }) => {
+const patch = async ({ buffer, id }) => {
   const buf = Buffer.from(buffer);
   const request = {
-    method: "POST",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/octet-stream"
     },
@@ -9,11 +9,11 @@ const upload = async ({ buffer, id }) => {
   };
 
   const response = await fetch(
-    `${process.env.REACT_APP_API}/docs/${id}/upload`,
+    `${process.env.REACT_APP_API}/docs/${id}/patch-file`,
     request
   );
 
   return response;
 };
 
-export default upload;
+export default patch;

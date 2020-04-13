@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const buttons = (history, classes) => [
+const buttons = (history, handleLogout, classes) => [
   <Button
     key="home-nav"
     className={classes.button}
@@ -52,30 +52,33 @@ const buttons = (history, classes) => [
   // <Button className={classes.button}>Documents</Button>,
   // <Button className={classes.button}>Notifications</Button>,
   // <Button className={classes.button}>Settings</Button>,
-  <Button key="log-out-nav" className={classes.button}>
+  <Button key="log-out-nav" onClick={handleLogout} className={classes.button}>
     Log Out
   </Button>
 ];
 
-const Component = ({ name, title, nextApprover }) => {
+const Component = ({ name, title, nextApprover, handleLogout }) => {
   const classes = useStyles();
-
   const history = useHistory();
 
   return (
     <div className={classes.flex}>
       <div className={classes.header}>
-        <div className={classes.title}>Review Status</div>
+        <div className={classes.title}>
+          {(nextApprover.firstName && "Review Status") || "DocShare"}
+        </div>
         <div className={classes.subTitle}>
-          {`Awaiting Review from ${nextApprover.firstName +
-            " " +
-            nextApprover.lastName}`}
+          {(nextApprover.firstName &&
+            `Awaiting Review from ${nextApprover.firstName +
+              " " +
+              nextApprover.lastName}`) ||
+            "Click avatar for some actions"}
         </div>
       </div>
       <User
         name={name}
         title={title}
-        popoverContent={buttons(history, classes)}
+        popoverContent={buttons(history, handleLogout, classes)}
       />
     </div>
   );

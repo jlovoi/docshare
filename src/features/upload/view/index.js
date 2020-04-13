@@ -9,8 +9,7 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import FileIcon from "@material-ui/icons/Description";
 import UserIcon from "@material-ui/icons/AccountCircle";
 
-import { CheckGroup } from "../../../components";
-import Step from "./step";
+import { CheckGroup, Step } from "../../../components";
 
 const useStyles = makeStyles(theme => ({
   arrow: {
@@ -180,15 +179,15 @@ const onSubmit = (
 export default ({ users, submitDoc, userId }) => {
   const classes = useStyles();
 
+  const [docName, setDocName] = useState("");
+  const [files, setFiles] = useState(null);
+  const [selectedUsers, setSelectedUsers] = useState([]);
+
   const onDrop = droppedFiles => {
     setFiles(droppedFiles);
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
-
-  const [docName, setDocName] = useState("");
-  const [files, setFiles] = useState(null);
-  const [selectedUsers, setSelectedUsers] = useState([]);
 
   const notDocx =
     files &&

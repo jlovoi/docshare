@@ -1,12 +1,9 @@
-const fetchUser = async ({ payload }) => {
+const fetchUser = async id => {
   const headers = {
     "Content-Type": "application/json"
   };
 
-  const user = await fetch(
-    "http://localhost:3000/users/5e17f39172f40bfb497730fb",
-    headers
-  );
+  const user = await fetch(`${process.env.REACT_APP_API}/users/${id}`, headers);
 
   return await user.json();
 };

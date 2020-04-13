@@ -7,7 +7,7 @@ const submitDoc = async document => {
     body: JSON.stringify(document)
   };
 
-  const response = await fetch("http://localhost:3000/docs/", request);
+  const response = await fetch(`${process.env.REACT_APP_API}/docs/`, request);
 
   const doc = await response.json();
   return doc;

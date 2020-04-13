@@ -2,12 +2,13 @@ import React from "react";
 import { Router, Route } from "react-router-dom";
 import { AppFrame } from "../../components";
 import { Header, Home, Upload, Workflow } from "../index";
+import withAuth from "../../auth";
 
-const App = ({ history }) => {
+const App = ({ history, handleLogout }) => {
   return (
     <AppFrame>
       <Router history={history}>
-        <Header />
+        <Header handleLogout={handleLogout} />
         <Route path="/docs" component={Workflow} />
         <Route path="/upload" component={Upload} />
         <Route exact path="/" component={Home} />
@@ -16,4 +17,4 @@ const App = ({ history }) => {
   );
 };
 
-export default App;
+export default withAuth(App);
