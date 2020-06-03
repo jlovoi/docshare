@@ -1,7 +1,7 @@
 import React from "react";
 import { Router, Route } from "react-router-dom";
 import { AppFrame } from "../../components";
-import { Header, Home, Upload, Workflow } from "../index";
+import { Header, Home, SideBar, Upload, Workflow } from "../index";
 import withAuth from "../../auth";
 
 const App = ({ history, handleLogout }) => {
@@ -9,6 +9,7 @@ const App = ({ history, handleLogout }) => {
     <AppFrame>
       <Router history={history}>
         <Header handleLogout={handleLogout} />
+        <SideBar />
         <Route path="/docs" component={Workflow} />
         <Route path="/upload" component={Upload} />
         <Route exact path="/" component={Home} />

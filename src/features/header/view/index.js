@@ -17,12 +17,15 @@ const useStyles = makeStyles(() => ({
   },
   title: {
     fontSize: "20px",
-    fontWeight: "bold"
+    fontWeight: "bold",
+    color: "#ffffff"
   },
   subTitle: {
-    fontSize: "14px"
+    fontSize: "14px",
+    color: "#ffffff"
   },
   flex: {
+    backgroundColor: "#013e70",
     width: "100%",
     height: "100px",
     display: "flex",
@@ -30,7 +33,8 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
     justifyContent: "space-between",
     zIndex: 10,
-    borderBottom: "2px solid black"
+    borderBottom: "2px solid #f1eee4",
+    boxShadow: "thick"
   }
 }));
 
