@@ -21,6 +21,7 @@ const useStyles = makeStyles(() => ({
     width: "60px"
   },
   name: {
+    color: "#ffffff",
     flex: 2,
     fontSize: "18px",
     display: "flex",
