@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import AddBoxIcon from "@material-ui/icons/AddBox";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 
@@ -8,7 +9,12 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     height: "50px",
     textTransform: "none",
-    fontSize: "20px"
+    fontSize: "20px",
+    display: "flex",
+    flexDirection: "row"
+  },
+  buttonText: {
+    marginLeft: "8px"
   },
   sidebarRoot: {
     backgroundColor: "#ededed",
@@ -22,18 +28,19 @@ const useStyles = makeStyles(theme => ({
 
 const buttons = (history, classes) => [
   <Button
+    key="new-doc-nav"
+    className={classes.button}
+    onClick={() => history.push("/upload")}
+  >
+    <AddBoxIcon />
+    <div className={classes.buttonText}>New Document</div>
+  </Button>,
+  <Button
     key="home-nav"
     className={classes.button}
     onClick={() => history.push("/")}
   >
     Your Documents
-  </Button>,
-  <Button
-    key="new-doc-nav"
-    className={classes.button}
-    onClick={() => history.push("/upload")}
-  >
-    New Document
   </Button>
   // <Button className={classes.button}>Documents</Button>,
   // <Button className={classes.button}>Notifications</Button>,

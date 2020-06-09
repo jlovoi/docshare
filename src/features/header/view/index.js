@@ -86,11 +86,10 @@ const Component = ({ name, title, nextApprover, handleLogout }) => {
             {(nextApprover.firstName && "Review Status") || "DocShare"}
           </div>
           <div className={classes.subTitle}>
-            {(nextApprover.firstName &&
+            {nextApprover.firstName &&
               `Awaiting Review from ${nextApprover.firstName +
                 " " +
-                nextApprover.lastName}`) ||
-              "Click avatar for some actions"}
+                nextApprover.lastName}`}
           </div>
         </div>
         <div className={classes.divider} />

@@ -3,8 +3,8 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(() => ({
   appframe: {
-    backgroundColor: "#fafafa",
-    minHeight: "95vh"
+    backgroundColor: "#f5f5f5",
+    minHeight: "100vh"
   }
 }));
 
