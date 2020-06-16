@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
     flexDirection: "row"
   },
   title: {
-    fontSize: "20px",
+    fontSize: "32px",
     fontWeight: "bold",
     color: "#ffffff"
   },
