@@ -2,6 +2,11 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+
+import TrashCan from "@material-ui/icons/Delete";
+import ArrowUp from "@material-ui/icons/ArrowDropUp";
+import ArrowDown from "@material-ui/icons/ArrowDropDown";
 
 const useStyles = makeStyles(theme => ({
   approverRoot: {
@@ -10,20 +15,38 @@ const useStyles = makeStyles(theme => ({
     padding: "12px",
     display: "flex",
     flexDirection: "row",
-    minWidth: "500px",
+    minWidth: "600px",
     width: "60%",
-    alignSelf: "self-start"
+    alignSelf: "self-start",
+    margin: "12px",
+    position: "relative"
   },
   approverType: {
     display: "flex",
     flexDirection: "column",
-    flex: 1,
-    justifyContent: "center"
+    flex: 5,
+    justifyContent: "center",
+    marginRight: "48px"
+  },
+  arrowButton: {
+    width: "12px"
   },
   button: {
     backgroundColor: "#bdbdbd",
     textTransform: "none",
     margin: "6px"
+  },
+  deleteButton: {
+    position: "absolute",
+    bottom: "0px",
+    right: "0px"
+  },
+  reorder: {
+    display: "flex",
+    flexDirection: "column",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
   },
   selectedButton: {
     backgroundColor: "#008cff",
@@ -37,15 +60,41 @@ const useStyles = makeStyles(theme => ({
   userInfo: {
     display: "flex",
     flexDirection: "column",
-    flex: 2
+    flex: 10
   }
 }));
 
-export default ({ name, email, type, setter }) => {
+export default ({
+  name,
+  email,
+  index,
+  length,
+  move,
+  onDelete,
+  type,
+  setter
+}) => {
   const classes = useStyles();
 
   return (
     <div className={classes.approverRoot}>
+      <div className={classes.reorder}>
+        <Button
+          className={classes.arrowButton}
+          disabled={index === 0}
+          onClick={() => move(index, index - 1)}
+        >
+          <ArrowUp />
+        </Button>
+        {index + 1}
+        <Button
+          className={classes.arrowButton}
+          disabled={index + 1 === length}
+          onClick={() => move(index, index + 1)}
+        >
+          <ArrowDown />
+        </Button>
+      </div>
       <div className={classes.userInfo}>
         <div>
           <TextField
@@ -82,7 +131,12 @@ export default ({ name, email, type, setter }) => {
         >
           Approver
         </Button>
-      </div>
+      </div>{" "}
+      {index !== 0 && (
+        <IconButton className={classes.deleteButton} onClick={onDelete}>
+          <TrashCan />
+        </IconButton>
+      )}
     </div>
   );
 };
