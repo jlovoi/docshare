@@ -11,12 +11,10 @@ const useStyles = makeStyles(theme => ({
     alignContent: "flex-start",
     justifyContent: "center"
   },
-  card: {
-    backgroundColor: "#d7d7d7",
-    width: "60%",
-    padding: "16px",
-    margin: "24px",
-    borderRadius: "8px"
+  documentContent: {
+    backgroundColor: "#f5f5f5",
+    width: "100%",
+    padding: "16px"
   },
   doc: {
     marginTop: "18px",
@@ -25,11 +23,16 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "space-between",
     alignItems: "center",
     paddingLeft: "24px",
-    paddingRight: "24px"
+    paddingRight: "24px",
+    borderTop: "1px solid #a9a9a9",
+    paddingTop: "20px"
   },
   download: {
     backgroundColor: "#11c178",
     color: "#ffffff"
+  },
+  header: {
+    fontSize: "32px"
   },
   text: {
     margin: "24px",
@@ -44,27 +47,31 @@ export default ({ userDocs }) => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.card}>
-        Your Documents
+      <div className={classes.documentContent}>
+        <div className={classes.header}>Your Documents</div>
         {userDocs.map(doc => (
           <div key={doc._id} className={classes.doc}>
-            {doc.name}
-            <Button
-              className={classes.download}
-              onClick={() => history.push(`docs/${doc._id}`)}
-            >
-              View Document
-            </Button>
-            <Button
-              className={classes.download}
-              onClick={() =>
-                window.open(
-                  `${process.env.REACT_APP_API}/docs/${doc._id}/download`
-                )
-              }
-            >
-              Download
-            </Button>
+            <div style={{ flex: 3 }}>{doc.name}</div>
+            <div style={{ flex: 3 }}>
+              <Button
+                className={classes.download}
+                onClick={() => history.push(`docs/${doc._id}`)}
+              >
+                View Document
+              </Button>
+            </div>
+            <div style={{ flex: 1 }}>
+              <Button
+                className={classes.download}
+                onClick={() =>
+                  window.open(
+                    `${process.env.REACT_APP_API}/docs/${doc._id}/download`
+                  )
+                }
+              >
+                Download
+              </Button>
+            </div>
           </div>
         ))}
         <div className={classes.text}>

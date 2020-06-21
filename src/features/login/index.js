@@ -23,6 +23,12 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "flex-start",
     alignItems: "center"
   },
+  column: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
+  },
   group: {
     display: "flex",
     flexDirection: "row",
@@ -75,6 +81,7 @@ const register = (
   email,
   title,
   setRegistered,
+  setRegistering,
   setError
 ) => {
   fetch(`${process.env.REACT_APP_API}/register`, {
@@ -93,6 +100,7 @@ const register = (
   }).then(res => {
     if (res.ok) {
       setRegistered(true);
+      setRegistering(false);
       setError(false);
     } else {
       setError(true);
@@ -107,6 +115,7 @@ const LogIn = ({ history, handleLogin }) => {
   const dispatch = useDispatch();
 
   const [error, setError] = useState(false);
+  const [registering, setRegistering] = useState(false);
   const [registered, setRegistered] = useState(false);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -131,7 +140,7 @@ const LogIn = ({ history, handleLogin }) => {
   return (
     <div className={classes.root}>
       <div className={classes.box}>
-        Log In
+        {registering ? "Register" : "Log In"}
         <Textfield
           className={classes.input}
           value={userName}
@@ -145,72 +154,91 @@ const LogIn = ({ history, handleLogin }) => {
           label="Password"
           onChange={e => setPassword(e.target.value)}
         />
+        {registering && (
+          <div>
+            <div className={classes.inputGroup}>
+              <Textfield
+                className={classes.input}
+                value={firstName}
+                label="First Name"
+                onChange={e => setFirstName(e.target.value)}
+              />
+              <Textfield
+                className={classes.input}
+                value={lastName}
+                label="Last Name"
+                onChange={e => setLastName(e.target.value)}
+              />
+            </div>
+            <div className={classes.inputGroup}>
+              <Textfield
+                className={classes.input}
+                value={email}
+                label="Email"
+                onChange={e => setEmail(e.target.value)}
+              />
+              <Textfield
+                className={classes.input}
+                value={title}
+                label="Title / Company Role"
+                onChange={e => setTitle(e.target.value)}
+              />
+            </div>
+            <div className={classes.column}>
+              <Button
+                className={classes.register}
+                onClick={() =>
+                  register(
+                    userName,
+                    password,
+                    firstName,
+                    lastName,
+                    email,
+                    title,
+                    setRegistered,
+                    setRegistering,
+                    setError
+                  )
+                }
+                disabled={regDisabled}
+              >
+                Register
+              </Button>
+            </div>
+          </div>
+        )}
+        {!registering && (
+          <div className={classes.buttonGroup}>
+            <Button
+              className={classes.login}
+              onClick={() => {
+                handleLogin(userName, password, dispatch);
+              }}
+              disabled={loginDisabled}
+            >
+              Log In
+            </Button>
+          </div>
+        )}
+        {!registering && (
+          <div>
+            <div className={classes.group}>
+              <div className={classes.divider} />
+              <div className={classes.small}>OR</div>
+              <div className={classes.divider} />
+            </div>
+            <div className={classes.group}>
+              <Button
+                className={classes.register}
+                onClick={() => setRegistering(true)}
+              >
+                Register
+              </Button>
+            </div>
+          </div>
+        )}
         <div className={classes.buttonGroup}>
-          <Button
-            className={classes.login}
-            onClick={() => {
-              handleLogin(userName, password, dispatch);
-            }}
-            disabled={loginDisabled}
-          >
-            Log In
-          </Button>
-        </div>
-        <div className={classes.group}>
-          <div className={classes.divider} />
-          <div className={classes.small}>OR</div>
-          <div className={classes.divider} />
-        </div>
-        Fill in the Rest to Register
-        <div className={classes.inputGroup}>
-          <Textfield
-            className={classes.input}
-            value={firstName}
-            label="First Name"
-            onChange={e => setFirstName(e.target.value)}
-          />
-          <Textfield
-            className={classes.input}
-            value={lastName}
-            label="Last Name"
-            onChange={e => setLastName(e.target.value)}
-          />
-        </div>
-        <div className={classes.inputGroup}>
-          <Textfield
-            className={classes.input}
-            value={email}
-            label="Email"
-            onChange={e => setEmail(e.target.value)}
-          />
-          <Textfield
-            className={classes.input}
-            value={title}
-            label="Title / Company Role"
-            onChange={e => setTitle(e.target.value)}
-          />
-        </div>
-        <Button
-          className={classes.register}
-          onClick={() =>
-            register(
-              userName,
-              password,
-              firstName,
-              lastName,
-              email,
-              title,
-              setRegistered,
-              setError
-            )
-          }
-          disabled={regDisabled}
-        >
-          Register
-        </Button>
-        <div className={classes.buttonGroup}>
-          {registered &&
-            "Successfully Registered! Now login with those same credentials"}
+          {registered && "Successfully Registered! Now click Log In!"}
           {error && "Could not register that username, please try another"}
         </div>
       </div>

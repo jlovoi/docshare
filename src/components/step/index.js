@@ -20,12 +20,11 @@ const useStyles = makeStyles(theme => ({
     textAlign: "center"
   },
   stepBox: {
-    minWidth: "500px",
+    minWidth: "400px",
     marginTop: "24px",
-    width: "60%",
-    padding: "12px",
-    borderRadius: "8px",
-    backgroundColor: "#d7d7d7"
+    width: "100%",
+    padding: "24px 0px 24px 0px",
+    borderRadius: "8px"
   },
   step: {
     fontSize: "24px",

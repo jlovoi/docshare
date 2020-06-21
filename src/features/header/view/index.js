@@ -13,16 +13,21 @@ const useStyles = makeStyles(() => ({
   },
   header: {
     height: "32px",
-    padding: "12px"
+    padding: "12px",
+    display: "flex",
+    flexDirection: "row"
   },
   title: {
-    fontSize: "20px",
-    fontWeight: "bold"
+    fontSize: "32px",
+    fontWeight: "bold",
+    color: "#ffffff"
   },
   subTitle: {
-    fontSize: "14px"
+    fontSize: "14px",
+    color: "#ffffff"
   },
   flex: {
+    backgroundColor: "#013e70",
     width: "100%",
     height: "100px",
     display: "flex",
@@ -30,7 +35,19 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
     justifyContent: "space-between",
     zIndex: 10,
-    borderBottom: "2px solid black"
+    borderBottom: "2px solid #f1eee4",
+    position: "fixed"
+  },
+  divider: {
+    borderWidth: "1px",
+    borderRadius: "8px",
+    height: "150%",
+    borderColor: "grey",
+    borderStyle: "solid",
+    marginLeft: "14px"
+  },
+  noFlex: {
+    display: "initial"
   }
 }));
 
@@ -64,16 +81,18 @@ const Component = ({ name, title, nextApprover, handleLogout }) => {
   return (
     <div className={classes.flex}>
       <div className={classes.header}>
-        <div className={classes.title}>
-          {(nextApprover.firstName && "Review Status") || "DocShare"}
+        <div className={classes.noFlex}>
+          <div className={classes.title}>
+            {(nextApprover.firstName && "Review Status") || "DocShare"}
+          </div>
+          <div className={classes.subTitle}>
+            {nextApprover.firstName &&
+              `Awaiting Review from ${nextApprover.firstName +
+                " " +
+                nextApprover.lastName}`}
+          </div>
         </div>
-        <div className={classes.subTitle}>
-          {(nextApprover.firstName &&
-            `Awaiting Review from ${nextApprover.firstName +
-              " " +
-              nextApprover.lastName}`) ||
-            "Click avatar for some actions"}
-        </div>
+        <div className={classes.divider} />
       </div>
       <User
         name={name}

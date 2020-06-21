@@ -1,25 +1,35 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
-import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 
-import { Avatar, UploadModal } from "../../../components";
+import ApprovalOrder from "./approval-order";
+import { UploadModal } from "../../../components";
 import DocInfo from "./doc-info";
 
 import Download from "@material-ui/icons/GetApp";
+import AddCircle from "@material-ui/icons/AddCircle";
+import RemoveCircle from "@material-ui/icons/RemoveCircle";
 
 const useStyles = makeStyles(() => ({
+  add: {
+    color: "forestgreen",
+    marginRight: "8px"
+  },
   approve: {
-    width: "100%",
-    position: "absolute",
+    position: "sticky",
     bottom: "2%",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center"
+    justifyContent: "center",
+    alignItems: "center"
   },
   approveButton: {
     backgroundColor: "darkseagreen",
     margin: "5px"
+  },
+  documentName: {
+    fontSize: "24px",
+    fontWeight: "bold"
   },
   downloadButton: {
     backgroundColor: "darkgrey",
@@ -29,33 +39,29 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "lightsteelblue",
     margin: "5px"
   },
-  box: {
-    borderRadius: "8px",
-    backgroundColor: "#d7d7d7",
-    width: "15%",
-    margin: "2.5%",
-    padding: "2.5%",
-    paddingBottom: "5.5%"
-  },
-  group: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "relative"
-  },
   progress: {
     position: "relative",
     top: "40%"
+  },
+  remove: {
+    color: "crimson",
+    marginRight: "8px",
+    marginLeft: "36px"
+  },
+  stats: {
+    marginTop: "12px",
+    display: "flex",
+    alignItems: "center",
+    width: "100%"
   },
   workflowRoot: {
     overflowY: "auto",
     overflowX: "hidden",
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "baseline",
-    height: "86vh"
+    height: "80vh"
   }
 }));
 
@@ -87,7 +93,6 @@ const onPatchFile = (droppedFiles, id, patchFile) => () => {
 const Workflow = ({
   approveDocument,
   document,
-  users,
   docInfo,
   insertsInfo,
   deletesInfo,
@@ -99,36 +104,36 @@ const Workflow = ({
   const [files, setFiles] = useState(null);
   const [openModal, setOpenModal] = useState(false);
 
-  const currentStage =
-    document.users &&
-    document.users.findIndex(user => {
-      return document.latestApproval && document.latestApproval === user._id;
-    });
+  const users = document.users || [{ firstName: "", lastName: "", email: "" }];
+
+  const currentStage = users.findIndex(user => {
+    return document.latestApproval && document.latestApproval === user._id;
+  });
 
   const isApproving =
-    currentStage >= 0 && userId === document.users[currentStage + 1]._id;
+    currentStage >= 0
+      ? userId === users[currentStage + 1]._id
+      : userId === users[0]._id;
+
+  const documentName = document.name || "";
+
+  const additions = Object.keys(insertsInfo).length;
+  const removals = Object.keys(deletesInfo).length;
 
   return (
     <div>
       <div className={classes.workflowRoot}>
-        <Box className={classes.box}>
-          <div className={classes.group}>
-            {users.map(
-              (user, index) =>
-                user && (
-                  <Avatar
-                    key={user._id}
-                    // avatar={avatars[index]}
-                    check={index <= currentStage}
-                    fillLine={index <= currentStage + 1}
-                    first={index === 0}
-                    fullName={user.firstName + " " + user.lastName}
-                    title={user.title}
-                  />
-                )
-            )}
-          </div>
-        </Box>
+        <div className={classes.documentName}>{documentName}</div>
+        <div className={classes.stats}>
+          <AddCircle className={classes.add} style={{ fontSize: "200%" }} />
+          {`${additions} Addition${additions === 1 ? "" : "s"}`}
+          <RemoveCircle
+            className={classes.remove}
+            style={{ fontSize: "200%" }}
+          />
+          {`${removals} Removal${removals === 1 ? "" : "s"}`}
+          <ApprovalOrder users={users} currentStage={currentStage} />
+        </div>
         <DocInfo
           docInfo={docInfo}
           insertsInfo={insertsInfo}
