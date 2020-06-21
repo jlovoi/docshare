@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
 
+import ApprovalOrder from "./approval-order";
 import { UploadModal } from "../../../components";
 import DocInfo from "./doc-info";
 
@@ -50,7 +51,8 @@ const useStyles = makeStyles(() => ({
   stats: {
     marginTop: "12px",
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
+    width: "100%"
   },
   workflowRoot: {
     overflowY: "auto",
@@ -59,7 +61,7 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "baseline",
-    height: "75vh"
+    height: "80vh"
   }
 }));
 
@@ -102,14 +104,16 @@ const Workflow = ({
   const [files, setFiles] = useState(null);
   const [openModal, setOpenModal] = useState(false);
 
-  const users = document.users || [];
+  const users = document.users || [{ firstName: "", lastName: "", email: "" }];
 
   const currentStage = users.findIndex(user => {
     return document.latestApproval && document.latestApproval === user._id;
   });
 
   const isApproving =
-    currentStage >= 0 && userId === users[currentStage + 1]._id;
+    currentStage >= 0
+      ? userId === users[currentStage + 1]._id
+      : userId === users[0]._id;
 
   const documentName = document.name || "";
 
@@ -128,6 +132,7 @@ const Workflow = ({
             style={{ fontSize: "200%" }}
           />
           {`${removals} Removal${removals === 1 ? "" : "s"}`}
+          <ApprovalOrder users={users} currentStage={currentStage} />
         </div>
         <DocInfo
           docInfo={docInfo}

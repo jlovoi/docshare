@@ -7,36 +7,40 @@ import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 
 const useStyles = makeStyles(() => ({
   avatarRoot: {
-    height: "120px",
-    width: "120px",
-    margin: "60px"
+    height: "40px",
+    width: "40px",
+    margin: "15px"
   },
   avatar: {
-    height: "120px",
-    width: "120px",
+    height: "40px",
+    width: "40px",
     position: "relative",
     zIndex: 1
   },
   check: {
     position: "absolute",
+    marginTop: "-11px",
+    marginLeft: "-10px",
     height: "20px",
     width: "20px"
     //    color: "#16B900"
   },
   waiting: {
     position: "absolute",
+    marginTop: "-11px",
+    marginLeft: "-10px",
     height: "20px",
     width: "20px"
   },
   line: {
     borderRadius: "8px",
-    height: "150%",
-    width: "0px",
+    width: "150%",
+    height: "0px",
     border: "2px solid #040404",
     position: "relative",
-    bottom: "250%",
+    bottom: "50%",
     zIndex: 0,
-    left: "50%"
+    right: "150%"
   },
   info: {
     padding: "6px"
@@ -46,17 +50,17 @@ const useStyles = makeStyles(() => ({
   },
   dashedLine: {
     borderRadius: "8px",
-    height: "150%",
-    width: "0px",
+    width: "150%",
+    height: "0px",
     border: "2px dashed #040404",
     position: "relative",
-    bottom: "250%",
+    bottom: "50%",
     zIndex: 0,
-    left: "50%"
+    right: "150%"
   },
   dummyLine: {
     borderRadius: "8px",
-    width: "1%",
+    height: "1%",
     border: "2px dashed #040404",
     position: "relative",
     bottom: "50%",
@@ -64,7 +68,7 @@ const useStyles = makeStyles(() => ({
   },
   popover: {
     position: "fixed !important",
-    left: "125px !important"
+    top: "40px !important"
   },
   title: {
     fontSize: "12px"
@@ -86,7 +90,8 @@ const Component = ({
   fillLine = false,
   first = false,
   fullName = "Joel Ovoi",
-  title
+  title,
+  children
 }) => {
   const classes = useStyles();
 
@@ -103,6 +108,7 @@ const Component = ({
       <Avatar
         className={classes.avatar}
         src={avatar}
+        children={children}
         onClick={e => setAnchorEl(e.currentTarget)}
       />
       <Popover
