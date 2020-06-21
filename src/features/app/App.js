@@ -15,8 +15,7 @@ const useStyles = makeStyles(theme => ({
   },
   appContent: {
     position: "relative",
-    top: "80px",
-    paddingTop: "24px",
+    paddingTop: "120px",
     paddingBottom: "24px",
     flex: 4,
     display: "flex",

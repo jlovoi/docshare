@@ -17,9 +17,8 @@ const useStyles = makeStyles(theme => ({
     marginLeft: "3px"
   },
   workflow: {
-    position: "fixed",
     height: "80vh",
-    width: "73%",
+    width: "70vw",
     left: "25%",
     paddingTop: "2.5%"
   }
