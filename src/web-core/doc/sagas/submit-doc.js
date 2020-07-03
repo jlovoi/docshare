@@ -24,10 +24,10 @@ function* saga({ payload }) {
       };
       yield call(upload, uploadBody);
       yield put(submitDocSuccess(data));
-      yield put(history.push("/"));
+      history.push("/");
     }
   } catch (error) {
-    console.error("ERROR FETCHING DOC: ", error);
+    console.error("ERROR SUBMITTING DOC: ", error);
   }
 }
 

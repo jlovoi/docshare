@@ -118,9 +118,7 @@ const doc = createSlice({
     submitDocInit: () => {
       // saga
     },
-    submitDocSuccess: (state, { payload }) => {
-      state.document = payload;
-    }
+    submitDocSuccess: () => {}
   }
 });
 
