@@ -7,6 +7,7 @@ import Component from "../view";
 
 const Container = props => {
   const { userId, fetchUserDocs } = props;
+
   useEffect(() => {
     fetchUserDocs(userId);
   }, [userId, fetchUserDocs]);

@@ -107,7 +107,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default ({ users, submitDoc, userId }) => {
+export default ({ user, submitDoc, userId }) => {
   const classes = useStyles();
 
   const [next, setNext] = useState(false);
@@ -116,6 +116,7 @@ export default ({ users, submitDoc, userId }) => {
   const [selectedUsers, setSelectedUsers] = useState([
     { name: "", email: "", type: "approver" }
   ]);
+  const [approverType, setApproverType] = useState("approver");
 
   const onDrop = droppedFiles => {
     setFiles(droppedFiles);
@@ -140,10 +141,18 @@ export default ({ users, submitDoc, userId }) => {
       </div>
       {next ? (
         <div className={classes.uploadRoot}>
-          {selectedUsers.map((user, index) => (
+          <Approver
+            {...user}
+            name={user.firstName + " " + user.lastName}
+            length={selectedUsers.length}
+            setter={(_, val) => setApproverType(val)}
+            type={approverType}
+            required
+          />
+          {selectedUsers.map((selectedUser, index) => (
             <Approver
               key={`approver-${index}`}
-              {...user}
+              {...selectedUser}
               index={index}
               length={selectedUsers.length}
               setter={makeSetter(selectedUsers, setSelectedUsers, index)}
@@ -199,7 +208,13 @@ export default ({ users, submitDoc, userId }) => {
           <Button
             className={classes.button}
             disabled={disabled}
-            onClick={onSubmit(files, docName, userId, selectedUsers, submitDoc)}
+            onClick={onSubmit(
+              files,
+              docName,
+              userId,
+              [user, ...selectedUsers],
+              submitDoc
+            )}
           >
             Submit
           </Button>

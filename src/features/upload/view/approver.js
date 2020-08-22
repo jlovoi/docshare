@@ -67,11 +67,12 @@ const useStyles = makeStyles(theme => ({
 export default ({
   name,
   email,
-  index,
+  index = -1,
   length,
   move,
   onDelete,
   type,
+  required,
   setter
 }) => {
   const classes = useStyles();
@@ -81,15 +82,15 @@ export default ({
       <div className={classes.reorder}>
         <Button
           className={classes.arrowButton}
-          disabled={index === 0}
+          disabled={required || index === 0}
           onClick={() => move(index, index - 1)}
         >
           <ArrowUp />
         </Button>
-        {index + 1}
+        {index + 2}
         <Button
           className={classes.arrowButton}
-          disabled={index + 1 === length}
+          disabled={required || index + 1 === length}
           onClick={() => move(index, index + 1)}
         >
           <ArrowDown />
@@ -101,6 +102,7 @@ export default ({
             className={classes.textField}
             value={name}
             label={"Name"}
+            disabled={required}
             onChange={e => setter("name", e.target.value)}
           />
         </div>
@@ -109,6 +111,7 @@ export default ({
             className={classes.textField}
             value={email}
             label={"Email"}
+            disabled={required}
             onChange={e => setter("email", e.target.value)}
           />
         </div>
@@ -132,7 +135,7 @@ export default ({
           Approver
         </Button>
       </div>{" "}
-      {index !== 0 && (
+      {!required && index !== 0 && (
         <IconButton className={classes.deleteButton} onClick={onDelete}>
           <TrashCan />
         </IconButton>

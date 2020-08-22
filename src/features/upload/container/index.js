@@ -7,7 +7,7 @@ import Component from "../view";
 const { submitDocInit } = Core.doc.actions;
 
 const mapStateToProps = state => ({
-  users: Core.users.selectors.users(state),
+  user: Core.user.selectors.getUser(state),
   userId: Core.user.selectors.getUserId(state)
 });
 
