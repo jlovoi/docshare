@@ -140,7 +140,7 @@ const LogIn = ({ history, handleLogin }) => {
   return (
     <div className={classes.root}>
       <div className={classes.box}>
-        {registering ? "Register" : "Log In"}
+        {registering ? "FUCK!!!" : "TIDDY"}
         <Textfield
           className={classes.input}
           value={userName}
