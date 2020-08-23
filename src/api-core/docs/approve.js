@@ -1,3 +1,5 @@
+import { API_URL } from "../../version";
+
 const approve = async ({ userId, docId }) => {
   const request = {
     method: "POST",
@@ -7,7 +9,7 @@ const approve = async ({ userId, docId }) => {
   };
 
   const response = await fetch(
-    `${process.env.REACT_APP_API}/docs/${docId}/approve/${userId}`,
+    `${API_URL}/docs/${docId}/approve/${userId}`,
     request
   );
 

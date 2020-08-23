@@ -1,6 +1,5 @@
 {
   "name": "docshare",
-  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.5",
@@ -23,10 +22,11 @@
   },
   "scripts": {
     "start:dev": "REACT_APP_API=http://localhost:8000 react-scripts start",
-    "start:prod": "REACT_APP_API=http://64.227.25.114:8000 react-scripts start",
+    "start:prod": "REACT_APP_API=https://tryhighnoon.com:8000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy:prod": "react-scripts build && scp -r ./build/* jlovoi@64.227.25.114:/var/www/tryhighnoon.com/html"
   },
   "eslintConfig": {
     "extends": "react-app"

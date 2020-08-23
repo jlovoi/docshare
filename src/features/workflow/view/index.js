@@ -10,6 +10,8 @@ import Download from "@material-ui/icons/GetApp";
 import AddCircle from "@material-ui/icons/AddCircle";
 import RemoveCircle from "@material-ui/icons/RemoveCircle";
 
+import { API_URL } from "../../../version";
+
 const useStyles = makeStyles(() => ({
   add: {
     color: "forestgreen",
@@ -159,9 +161,7 @@ const Workflow = ({
         <Button
           className={classes.downloadButton}
           onClick={() =>
-            window.open(
-              `${process.env.REACT_APP_API}/docs/${document._id}/download`
-            )
+            window.open(`${API_URL}/docs/${document._id}/download`)
           }
         >
           <Download />

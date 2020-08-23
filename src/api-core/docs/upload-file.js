@@ -1,3 +1,5 @@
+import { API_URL } from "../../version";
+
 const upload = async ({ buffer, id }) => {
   const buf = Buffer.from(buffer);
   const request = {
@@ -8,10 +10,7 @@ const upload = async ({ buffer, id }) => {
     body: buf
   };
 
-  const response = await fetch(
-    `${process.env.REACT_APP_API}/docs/${id}/upload`,
-    request
-  );
+  const response = await fetch(`${API_URL}/docs/${id}/upload`, request);
 
   return response;
 };

@@ -1,8 +1,10 @@
 import decode from "jwt-decode";
 
+import { API_URL } from "../version";
+
 export default class AuthHelperMethods {
   constructor(domain) {
-    this.domain = `${process.env.REACT_APP_API}`;
+    this.domain = `${API_URL}`;
   }
 
   login = (username, password) => {

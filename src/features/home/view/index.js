@@ -3,6 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
 
+import { API_URL } from "../../../version";
+
 const useStyles = makeStyles(theme => ({
   root: {
     height: "100%",
@@ -64,9 +66,7 @@ export default ({ userDocs }) => {
               <Button
                 className={classes.download}
                 onClick={() =>
-                  window.open(
-                    `${process.env.REACT_APP_API}/docs/${doc._id}/download`
-                  )
+                  window.open(`${API_URL}/docs/${doc._id}/download`)
                 }
               >
                 Download

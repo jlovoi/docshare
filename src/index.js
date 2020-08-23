@@ -14,11 +14,17 @@ import sagas from "./web-core/sagas";
 import init from "./initialize";
 import "./index.css";
 
+const prod = Boolean(
+  (process.env.REACT_APP_API || process.env.NODE_ENV) === "production"
+);
+
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
   reducers,
-  composeWithDevTools(applyMiddleware(sagaMiddleware))
+  prod
+    ? applyMiddleware(sagaMiddleware)
+    : composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
 
 sagas.map(saga => sagaMiddleware.run(saga));

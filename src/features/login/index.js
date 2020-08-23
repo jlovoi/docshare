@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Textfield from "@material-ui/core/TextField";
 
+import { API_URL } from "../../version";
+
 const useStyles = makeStyles(theme => ({
   root: {
     height: "100vh",
@@ -84,7 +86,7 @@ const register = (
   setRegistering,
   setError
 ) => {
-  fetch(`${process.env.REACT_APP_API}/register`, {
+  fetch(`${API_URL}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -125,7 +127,7 @@ const LogIn = ({ history, handleLogin }) => {
   const [lastName, setLastName] = useState("");
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API}`, {
+    fetch(`${API_URL}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
