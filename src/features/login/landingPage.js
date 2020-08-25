@@ -87,7 +87,11 @@ export default ({ handleLogin }) => {
         </Button>
       </nav>
 
-      <LoginModal handleLogin={handleLogin} open={openModal} />
+      <LoginModal
+        handleLogin={handleLogin}
+        open={openModal}
+        setOpen={setOpenModal}
+      />
 
       <section className="features-icons bg-light text-center">
         <div className="container">
