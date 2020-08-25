@@ -5,7 +5,7 @@ import Popover from "@material-ui/core/Popover";
 
 // import SampleAvatar from "./avatar.jpg";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   user: {
     height: "60px",
     width: "400px",
@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
     width: "60px"
   },
   name: {
-    color: "#ffffff",
+    color: "black",
     flex: 2,
     fontSize: "18px",
     display: "flex",

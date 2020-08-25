@@ -1,11 +1,12 @@
 import React from "react";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles, useTheme } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
 
 import { User } from "../../../components";
+import logo from "../../login/assets/highNoonLogo.png";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   button: {
     width: "100%",
     height: "30px",
@@ -17,17 +18,18 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexDirection: "row"
   },
-  title: {
-    fontSize: "32px",
-    fontWeight: "bold",
-    color: "#ffffff"
+  logo: {
+    position: "relative",
+    top: "-58px",
+    height: "150px",
+    width: "175px"
   },
   subTitle: {
     fontSize: "14px",
     color: "#ffffff"
   },
   flex: {
-    backgroundColor: "#013e70",
+    backgroundColor: theme.palette.offwhite,
     width: "100%",
     height: "100px",
     display: "flex",
@@ -75,16 +77,19 @@ const buttons = (history, handleLogout, classes) => [
 ];
 
 const Component = ({ name, title, nextApprover, handleLogout }) => {
-  const classes = useStyles();
+  const theme = useTheme();
+  const classes = useStyles(theme);
   const history = useHistory();
 
   return (
     <div className={classes.flex}>
       <div className={classes.header}>
         <div className={classes.noFlex}>
-          <div className={classes.title}>
-            {(nextApprover.firstName && "Review Status") || "DocShare"}
-          </div>
+          <img
+            onClick={() => history.push("/")}
+            className={classes.logo}
+            src={logo}
+          />
           <div className={classes.subTitle}>
             {nextApprover.firstName &&
               `Awaiting Review from ${nextApprover.firstName +

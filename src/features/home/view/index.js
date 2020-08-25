@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     paddingTop: "20px"
   },
   download: {
-    backgroundColor: "#11c178",
+    backgroundColor: theme.palette.skobeloff,
     color: "#ffffff"
   },
   header: {

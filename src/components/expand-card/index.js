@@ -29,23 +29,23 @@ const handleExpandClick = (expanded, setExpanded) => () => {
   setExpanded(!expanded);
 };
 
-const Component = () => {
+const Component = (expanded, Component) => {
   const classes = useStyles();
 
-  const [expanded, setExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <Card className={classes.expandCard}>
       <CardContent className={classes.header}>
         <Button
           className={classes.button}
-          onClick={handleExpandClick(expanded, setExpanded)}
+          onClick={handleExpandClick(isExpanded, setIsExpanded)}
         >
           <KeyboardArrowDown />
         </Button>
       </CardContent>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>Content</CardContent>
+        <CardContent>Component</CardContent>
       </Collapse>
     </Card>
   );

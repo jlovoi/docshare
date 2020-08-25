@@ -2,18 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import Modal from "@material-ui/core/Modal";
 import Textfield from "@material-ui/core/TextField";
 
 import { API_URL } from "../../version";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: "100vh",
-    width: "100vw",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f1eee4"
+    alignItems: "center"
   },
   box: {
     width: "60%",
@@ -112,7 +110,7 @@ const register = (
   });
 };
 
-const LogIn = ({ history, handleLogin }) => {
+const LogIn = ({ open, history, handleLogin }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -140,7 +138,7 @@ const LogIn = ({ history, handleLogin }) => {
     loginDisabled || !email || !title || !firstName || !lastName;
 
   return (
-    <div className={classes.root}>
+    <Modal open={open} className={classes.root}>
       <div className={classes.box}>
         {registering ? "Register" : "Log In"}
         <Textfield
@@ -244,7 +242,7 @@ const LogIn = ({ history, handleLogin }) => {
           {error && "Could not register that username, please try another"}
         </div>
       </div>
-    </div>
+    </Modal>
   );
 };
 

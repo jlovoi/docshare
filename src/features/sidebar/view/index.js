@@ -17,12 +17,13 @@ const useStyles = makeStyles(theme => ({
     marginLeft: "8px"
   },
   sidebarRoot: {
-    backgroundColor: "#ededed",
+    backgroundColor: theme.palette.offwhite,
     height: "90vh",
     position: "fixed",
     width: "20%",
     maxWidth: "250px",
-    top: "100px"
+    top: "100px",
+    zIndex: 10
   }
 }));
 

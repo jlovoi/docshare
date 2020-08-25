@@ -2,6 +2,9 @@
   "name": "docshare",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
+    "@fortawesome/react-fontawesome": "^0.1.11",
     "@material-ui/core": "^4.9.5",
     "@material-ui/icons": "^4.5.1",
     "@reduxjs/toolkit": "^1.2.1",
@@ -21,8 +24,8 @@
     "reselect": "^4.0.0"
   },
   "scripts": {
-    "start:dev": "REACT_APP_API=http://localhost:8000 react-scripts start",
-    "start:prod": "REACT_APP_API=https://tryhighnoon.com:8000 react-scripts start",
+    "start:dev": "REACT_APP_API=development react-scripts start",
+    "start:prod": "REACT_APP_API=production react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

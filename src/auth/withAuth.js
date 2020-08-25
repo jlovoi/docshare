@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AuthHelperMethods from "./authHelpers";
-import { LogIn } from "../features";
+import LandingPage from "../features/login/landingPage";
 import Core from "../web-core";
 
 import LoadUser from "./LoadUser";
@@ -66,7 +66,7 @@ export default ChildComponent => {
           );
         } else {
           return (
-            <LogIn
+            <LandingPage
               history={this.props.history}
               handleLogin={this.handleLogin}
             />
@@ -74,7 +74,10 @@ export default ChildComponent => {
         }
       } else {
         return (
-          <LogIn history={this.props.history} handleLogin={this.handleLogin} />
+          <LandingPage
+            history={this.props.history}
+            handleLogin={this.handleLogin}
+          />
         );
       }
     }

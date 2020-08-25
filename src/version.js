@@ -1,6 +1,6 @@
 const environment = {
-  development: "http://localhost:8000",
-  production: "https://tryhighnoon.com:8000"
+  development: "http://localhost:8080",
+  production: "https://tryhighnoon.com:2599"
 };
 
 export const API_URL =
