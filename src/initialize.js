@@ -6,7 +6,7 @@ import initApplication from "./constants";
 const { fetchUsers } = Core.users.actions;
 
 function* init() {
-  yield put(fetchUsers());
+  // yield put(fetchUsers());
 }
 
 function* initializeApp() {

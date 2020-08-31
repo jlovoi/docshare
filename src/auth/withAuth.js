@@ -52,7 +52,6 @@ export default ChildComponent => {
     }
 
     render() {
-      console.log("confirm", this.state.confirm);
       if (this.state.loaded === true) {
         if (this.state.confirm) {
           return (

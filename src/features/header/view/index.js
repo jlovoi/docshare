@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     top: "-58px",
     height: "150px",
-    width: "175px"
+    width: "160px"
   },
   subTitle: {
     fontSize: "14px",

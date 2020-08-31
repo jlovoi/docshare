@@ -100,7 +100,8 @@ const register = (
       firstName,
       lastName,
       email,
-      title
+      title,
+      organization: "5f4c428cb9201402011ff693"
     })
   }).then(res => {
     if (res.ok) {

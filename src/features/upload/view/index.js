@@ -118,6 +118,13 @@ export default ({ user, submitDoc, userId }) => {
   ]);
   const [approverType, setApproverType] = useState("approver");
 
+  const hasDuplicate = selectedUsers
+    .map(u => u.email)
+    .some(
+      (email, index, arr) =>
+        arr.indexOf(email) !== index || email === user.email
+    );
+
   const onDrop = droppedFiles => {
     setFiles(droppedFiles);
   };
@@ -132,7 +139,12 @@ export default ({ user, submitDoc, userId }) => {
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     );
   const disabled =
-    !files || files.length > 1 || notDocx || !selectedUsers.length || !docName;
+    !files ||
+    files.length > 1 ||
+    notDocx ||
+    !selectedUsers.length ||
+    !docName ||
+    hasDuplicate;
 
   return (
     <div className={classes.uploadRoot}>

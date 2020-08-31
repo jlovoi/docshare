@@ -21,6 +21,7 @@ const useStyles = makeStyles(theme => ({
     height: "90vh",
     position: "fixed",
     width: "20%",
+    minWidth: "200px",
     maxWidth: "250px",
     top: "100px",
     zIndex: 10
