@@ -76,7 +76,13 @@ const buttons = (history, handleLogout, classes) => [
   </Button>
 ];
 
-const Component = ({ name, title, nextApprover, handleLogout }) => {
+const Component = ({
+  name,
+  title,
+  organization,
+  nextApprover,
+  handleLogout
+}) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const history = useHistory();
@@ -89,6 +95,7 @@ const Component = ({ name, title, nextApprover, handleLogout }) => {
             onClick={() => history.push("/")}
             className={classes.logo}
             src={logo}
+            alt="High Noon"
           />
           <div className={classes.subTitle}>
             {nextApprover.firstName &&
@@ -102,6 +109,7 @@ const Component = ({ name, title, nextApprover, handleLogout }) => {
       <User
         name={name}
         title={title}
+        organization={organization}
         popoverContent={buttons(history, handleLogout, classes)}
       />
     </div>

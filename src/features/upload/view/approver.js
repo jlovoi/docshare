@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
@@ -65,6 +66,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default ({
+  options,
   name,
   email,
   index = -1,
@@ -76,6 +78,13 @@ export default ({
   setter
 }) => {
   const classes = useStyles();
+  if (!options && !required) return null;
+  let opts = [];
+  if (!options) {
+    opts = [{ name: "", email: "" }];
+  } else {
+    opts = [...options, { name: "", email: "" }];
+  }
 
   return (
     <div className={classes.approverRoot}>
@@ -98,21 +107,53 @@ export default ({
       </div>
       <div className={classes.userInfo}>
         <div>
-          <TextField
-            className={classes.textField}
-            value={name}
-            label={"Name"}
+          <Autocomplete
+            options={opts || []}
+            getOptionLabel={option =>
+              !option ? "" : option.firstName + " " + option.lastName
+            }
+            id="debug"
+            debug
             disabled={required}
-            onChange={e => setter("name", e.target.value)}
+            value={name || ""}
+            onChange={(event, newValue) => {
+              console.log("NEW", newValue);
+              if (newValue) {
+                setter("name", newValue.firstName + " " + newValue.lastName);
+                setter("email", newValue.email);
+              }
+            }}
+            renderInput={params => (
+              <TextField
+                {...params}
+                className={classes.textField}
+                label={"Name"}
+              />
+            )}
           />
         </div>
         <div>
-          <TextField
-            className={classes.textField}
-            value={email}
-            label={"Email"}
+          <Autocomplete
+            options={opts || []}
+            getOptionLabel={option => option.email || ""}
+            id="debug"
+            debug
             disabled={required}
-            onChange={e => setter("email", e.target.value)}
+            value={email || ""}
+            onChange={(event, newValue) => {
+              console.log("NEW", newValue);
+              if (newValue) {
+                setter("name", newValue.firstName + " " + newValue.lastName);
+                setter("email", newValue.email);
+              }
+            }}
+            renderInput={params => (
+              <TextField
+                {...params}
+                className={classes.textField}
+                label={"Email"}
+              />
+            )}
           />
         </div>
       </div>

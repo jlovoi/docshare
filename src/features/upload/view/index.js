@@ -107,7 +107,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default ({ user, submitDoc, userId }) => {
+export default ({ user, organizationUsers, submitDoc, userId }) => {
   const classes = useStyles();
 
   const [next, setNext] = useState(false);
@@ -156,6 +156,7 @@ export default ({ user, submitDoc, userId }) => {
           <Approver
             {...user}
             name={user.firstName + " " + user.lastName}
+            email={user.email}
             length={selectedUsers.length}
             setter={(_, val) => setApproverType(val)}
             type={approverType}
@@ -165,6 +166,7 @@ export default ({ user, submitDoc, userId }) => {
             <Approver
               key={`approver-${index}`}
               {...selectedUser}
+              options={organizationUsers}
               index={index}
               length={selectedUsers.length}
               setter={makeSetter(selectedUsers, setSelectedUsers, index)}

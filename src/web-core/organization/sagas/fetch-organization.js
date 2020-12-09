@@ -9,7 +9,7 @@ function* saga({ payload }) {
   try {
     const { id } = payload;
 
-    const organization = yield call(apiFetch, { id });
+    const organization = yield call(apiFetch, id);
     yield put(setOrganization(organization));
   } catch (error) {
     console.error("ERROR FETCHING ORGANIZATION: ", error);

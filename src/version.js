@@ -1,5 +1,5 @@
 const environment = {
-  development: "http://localhost:80",
+  development: "http://localhost:8080",
   production: "https://tryhighnoon.com:2599"
 };
 

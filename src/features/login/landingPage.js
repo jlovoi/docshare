@@ -76,7 +76,7 @@ export default ({ handleLogin }) => {
   const [openModal, setOpenModal] = useState(false);
 
   return (
-    <body>
+    <div>
       <nav className={classes.header}>
         <img src={highNoonLogo} alt="High" />
         <Button
@@ -194,12 +194,12 @@ export default ({ handleLogin }) => {
         <div className="container">
           <div className={classes.footer}>
             <div className="col-lg-6 h-100 text-center text-lg-left my-auto">
-              <a href="#" className={classes.margin}>
+              {/* <a href="#" className={classes.margin}>
                 About
               </a>
               <a href="#" className={classes.margin}>
                 Contact
-              </a>
+              </a> */}
               <p className="text-muted small mb-4 mb-lg-0">
                 &copy; HighNoon 2020. All Rights Reserved.
               </p>
@@ -207,6 +207,6 @@ export default ({ handleLogin }) => {
           </div>
         </div>
       </footer>
-    </body>
+    </div>
   );
 };

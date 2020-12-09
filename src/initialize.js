@@ -1,9 +1,9 @@
-import { put, takeEvery } from "redux-saga/effects";
+import { takeEvery } from "redux-saga/effects";
 
-import Core from "./web-core";
+// import Core from "./web-core";
 import initApplication from "./constants";
 
-const { fetchUsers } = Core.users.actions;
+// const { fetchUsers } = Core.users.actions;
 
 function* init() {
   // yield put(fetchUsers());

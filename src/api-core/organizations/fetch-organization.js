@@ -6,7 +6,7 @@ const fetchOrganization = async organizationId => {
   };
 
   const organization = await fetch(
-    `${API_URL}/organization/${organizationId}`,
+    `${API_URL}/organizations/${organizationId}`,
     headers
   );
 
