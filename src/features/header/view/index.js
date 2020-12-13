@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 
 import { User } from "../../../components";
 import logo from "../../login/assets/highNoonLogo.png";
+import { version } from "../../../version";
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     color: "#ffffff"
   },
   flex: {
-    backgroundColor: theme.palette.offwhite,
+    backgroundColor: theme.palette.sand,
     width: "100%",
     height: "100px",
     display: "flex",
@@ -50,6 +51,12 @@ const useStyles = makeStyles(theme => ({
   },
   noFlex: {
     display: "initial"
+  },
+  version: {
+    fontSize: 10,
+    color: "grey",
+    marginTop: "24%",
+    marginRight: "-17%"
   }
 }));
 
@@ -90,6 +97,7 @@ const Component = ({
   return (
     <div className={classes.flex}>
       <div className={classes.header}>
+        <div className={classes.version}>{`v${version}`}</div>
         <div className={classes.noFlex}>
           <img
             onClick={() => history.push("/")}

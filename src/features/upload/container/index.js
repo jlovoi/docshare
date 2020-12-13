@@ -15,7 +15,7 @@ const UploadContainer = props => {
     if (organizationId) {
       getOrgUsers(organizationId).then(val => organizationUsers.push(...val));
     }
-  }, [organizationId]);
+  }, [organizationId, organizationUsers]);
 
   return <Component {...props} organizationUsers={organizationUsers} />;
 };

@@ -7,6 +7,7 @@ import { AppFrame } from "../../components";
 import { Header, Home, SideBar, Upload, Workflow } from "../index";
 import withAuth from "../../auth";
 import theme from "./theme";
+import CommentsSection from "../workflow/view/comments-section";
 
 const useStyles = makeStyles(theme => ({
   appFlex: {
@@ -41,6 +42,7 @@ const App = ({ history, handleLogout }) => {
             </div>
             <div className={classes.appContent}>
               <Route path="/docs" component={Workflow} />
+              <Route path="/docs" component={CommentsSection} />
               <Route path="/upload" component={Upload} />
               <Route exact path="/" component={Home} />
             </div>

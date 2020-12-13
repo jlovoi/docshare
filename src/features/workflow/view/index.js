@@ -37,10 +37,6 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "darkgrey",
     margin: "5px"
   },
-  uploadButton: {
-    backgroundColor: "lightsteelblue",
-    margin: "5px"
-  },
   progress: {
     position: "relative",
     top: "40%"
@@ -56,6 +52,15 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
     width: "100%"
   },
+  uploadButton: {
+    backgroundColor: "lightsteelblue",
+    margin: "5px"
+  },
+  workflowContainer: {
+    height: "78vh",
+    width: "75vw",
+    minWidth: "750px"
+  },
   workflowRoot: {
     overflowY: "auto",
     overflowX: "hidden",
@@ -63,7 +68,8 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "baseline",
-    height: "80vh"
+    height: "100%",
+    width: "70%"
   }
 }));
 
@@ -123,7 +129,7 @@ const Workflow = ({
   const removals = Object.keys(deletesInfo).length;
 
   return (
-    <div>
+    <div className={classes.workflowContainer}>
       <div className={classes.workflowRoot}>
         <div className={classes.documentName}>{documentName}</div>
         <div className={classes.stats}>
