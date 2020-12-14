@@ -74,22 +74,14 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-const sendComment = (text, comments, setText, setComments) => () => {
-	setComments([
-		...comments,
-		{
-			comment: text,
-			timestamp: new Date().valueOf(),
-			user: '5f4c44aa36156b1a08604f10',
-		},
-	]);
+const sendComment = (text, setText, addComment, userId, docId) => () => {
+	addComment({ userId, docId, comment: text, timestamp: new Date().valueOf() });
 	setText('');
 };
 
-const CommentsSection = ({}) => {
+const CommentsSection = ({ comments, userId, docId, addComment }) => {
 	const classes = useStyles();
 
-	const [comments, setComments] = React.useState([]);
 	const [text, setText] = React.useState('');
 
 	return (
@@ -97,9 +89,9 @@ const CommentsSection = ({}) => {
 			<div className={classes.scrollable}>
 				<div className={classes.commentsSectionContainer}>
 					{comments.map(comment => {
-						const self = comment.user === '5f4c44aa36156b1a08604f10';
+						const self = comment.userId === userId;
 						return (
-							<div className={classes.comment}>
+							<div key={comment._id} className={classes.comment}>
 								<div
 									className={
 										self
@@ -126,7 +118,7 @@ const CommentsSection = ({}) => {
 						<Button
 							disabled={!text}
 							className={classes.sendButton}
-							onClick={sendComment(text, comments, setText, setComments)}
+							onClick={sendComment(text, setText, addComment, userId, docId)}
 						>
 							Send
 						</Button>
