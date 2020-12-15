@@ -99,9 +99,9 @@ const CommentsSection = ({ comments, userId, docId, addComment }) => {
 											: classes.commentDetails
 									}
 								>
-									{`${self ? 'You' : 'Joseph Lovoi'}, at ${moment(
+									{`${self ? 'You' : comment.userName}, ${moment(
 										comment.timestamp,
-									).format('h:mm a')}`}
+									).format('MMM D h:mm a')}`}
 								</div>
 								<Bubble content={comment.comment} fromRight={self} />
 							</div>
