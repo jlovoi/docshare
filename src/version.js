@@ -7,4 +7,4 @@ const environment = {
 export const API_URL =
 	environment[process.env.REACT_APP_API || process.env.NODE_ENV];
 
-export const version = '0.1.0';
+export const version = '0.1.1';
