@@ -7,8 +7,9 @@ const organization = createSlice({
     fetchOrganization: () => {
       // saga
     },
-    setOrganization: (state, action) => {
-      state = action.payload;
+    setOrganization: (state, { payload }) => {
+      state.name = payload.name;
+      state._id = payload._id;
     }
   }
 });

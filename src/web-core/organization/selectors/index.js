@@ -1,3 +1,7 @@
-import { getOrganization, getOrganizationName } from "./base-funcs";
+import {
+  getOrganization,
+  getOrganizationName,
+  getOrganizationId
+} from "./base-funcs";
 
-export { getOrganization, getOrganizationName };
+export { getOrganization, getOrganizationName, getOrganizationId };

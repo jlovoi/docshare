@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 
 import { User } from "../../../components";
 import logo from "../../login/assets/highNoonLogo.png";
+import { version } from "../../../version";
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     color: "#ffffff"
   },
   flex: {
-    backgroundColor: theme.palette.offwhite,
+    backgroundColor: theme.palette.sand,
     width: "100%",
     height: "100px",
     display: "flex",
@@ -50,6 +51,12 @@ const useStyles = makeStyles(theme => ({
   },
   noFlex: {
     display: "initial"
+  },
+  version: {
+    fontSize: 10,
+    color: "grey",
+    marginTop: "24%",
+    marginRight: "-17%"
   }
 }));
 
@@ -76,7 +83,13 @@ const buttons = (history, handleLogout, classes) => [
   </Button>
 ];
 
-const Component = ({ name, title, nextApprover, handleLogout }) => {
+const Component = ({
+  name,
+  title,
+  organization,
+  nextApprover,
+  handleLogout
+}) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const history = useHistory();
@@ -84,11 +97,13 @@ const Component = ({ name, title, nextApprover, handleLogout }) => {
   return (
     <div className={classes.flex}>
       <div className={classes.header}>
+        <div className={classes.version}>{`v${version}`}</div>
         <div className={classes.noFlex}>
           <img
             onClick={() => history.push("/")}
             className={classes.logo}
             src={logo}
+            alt="High Noon"
           />
           <div className={classes.subTitle}>
             {nextApprover.firstName &&
@@ -102,6 +117,7 @@ const Component = ({ name, title, nextApprover, handleLogout }) => {
       <User
         name={name}
         title={title}
+        organization={organization}
         popoverContent={buttons(history, handleLogout, classes)}
       />
     </div>

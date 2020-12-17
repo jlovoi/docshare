@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     alignContent: "center",
     justifyContent: "flex-start",
     textAlign: "right",
-    marginTop: "12px",
+    marginTop: "6px",
     position: "relative",
     left: "18px"
   },
@@ -56,7 +56,7 @@ const handleClick = (anchorEl, setAnchorEl) => event => {
   else setAnchorEl(null);
 };
 
-const User = ({ name, title, popoverContent }) => {
+const User = ({ name, title, organization, popoverContent }) => {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -70,6 +70,7 @@ const User = ({ name, title, popoverContent }) => {
         <div className={classes.name}>
           {name}
           <div className={classes.title}>{title}</div>
+          <div className={classes.title}>{organization}</div>
         </div>
         <Avatar className={classes.avatar} />
         <Popover

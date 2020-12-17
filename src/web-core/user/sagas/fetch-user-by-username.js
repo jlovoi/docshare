@@ -12,7 +12,9 @@ function* saga({ payload }) {
     const { username } = payload;
     const user = yield call(fetchUserByUsername, username);
     yield put(setUser(user));
-    yield put(orgActions.fetchOrganization(user.organization));
+    const { organization } = user;
+    if (organization)
+      yield put(orgActions.fetchOrganization({ id: organization }));
   } catch (error) {
     console.error("ERROR FETCHING USER: ", error);
   }
