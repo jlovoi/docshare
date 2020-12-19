@@ -14,6 +14,7 @@ import {
 } from '../index';
 import withAuth from '../../auth';
 import theme from './theme';
+import LandingPage from '../login/landingPage';
 
 const useStyles = makeStyles(theme => ({
 	appFlex: {
@@ -41,16 +42,34 @@ const App = ({ history, handleLogout }) => {
 		<AppFrame>
 			<Router history={history}>
 				<ThemeProvider theme={theme}>
-					<Header handleLogout={handleLogout} />
+					<Route
+						render={({ location }) =>
+							location.pathname === '/landing-page' ? null : (
+								<Header handleLogout={handleLogout} />
+							)
+						}
+					/>
 					<div className={classes.appFlex}>
-						<div className={classes.sideBar}>
-							<SideBar />
-						</div>
+						<Route
+							render={({ location }) =>
+								location.pathname === '/landing-page' ? null : (
+									<div className={classes.sideBar}>
+										<SideBar />
+									</div>
+								)
+							}
+						/>
 						<div className={classes.appContent}>
 							<Route path="/docs" component={Workflow} />
 							<Route path="/docs" component={CommentsSection} />
 							<Route path="/upload" component={Upload} />
 							<Route exact path="/" component={Home} />
+							<Route
+								path="/landing-page"
+								component={() => (
+									<LandingPage handleLogout={handleLogout} history={history} />
+								)}
+							/>
 						</div>
 					</div>
 				</ThemeProvider>

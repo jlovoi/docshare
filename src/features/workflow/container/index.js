@@ -24,7 +24,11 @@ const Container = ({
 	useEffect(() => {
 		dispatch(Core.doc.actions.fetchDocInfo(docId));
 		dispatch(Core.doc.actions.fetchDoc(docId));
-		dispatch(Core.doc.actions.fetchCommentsInit(docId));
+
+		return () => {
+			dispatch(Core.doc.actions.setDocInfo({}));
+			dispatch(Core.doc.actions.setDoc({}));
+		};
 	}, [docId, dispatch]);
 
 	return (

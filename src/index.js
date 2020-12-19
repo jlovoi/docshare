@@ -1,45 +1,45 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { createBrowserHistory } from "history";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createBrowserHistory } from 'history';
 
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import createSagaMiddleware from "redux-saga";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-import App from "./features/app";
-import * as serviceWorker from "./serviceWorker";
-import reducers from "./web-core/reducers";
-import sagas from "./web-core/sagas";
-import init from "./initialize";
-import "./index.css";
+import App from './features/app';
+import * as serviceWorker from './serviceWorker';
+import reducers from './web-core/reducers';
+import sagas from './web-core/sagas';
+import init from './initialize';
+import './index.css';
 
 const prod = Boolean(
-  (process.env.REACT_APP_API || process.env.NODE_ENV) === "production"
+	(process.env.REACT_APP_API || process.env.NODE_ENV) === 'production',
 );
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
-  reducers,
-  prod
-    ? applyMiddleware(sagaMiddleware)
-    : composeWithDevTools(applyMiddleware(sagaMiddleware))
+	reducers,
+	prod
+		? applyMiddleware(sagaMiddleware)
+		: composeWithDevTools(applyMiddleware(sagaMiddleware)),
 );
 
 sagas.map(saga => sagaMiddleware.run(saga));
 sagaMiddleware.run(init);
 
-store.dispatch({ type: "INIT" });
+store.dispatch({ type: 'INIT' });
 
 export const history = createBrowserHistory();
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(
-  <Provider store={store}>
-    <App history={history} />
-  </Provider>,
-  rootElement
+	<Provider store={store}>
+		<App history={history} store={store} />
+	</Provider>,
+	rootElement,
 );
 
 // If you want your app to work offline and load faster, you can change

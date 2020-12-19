@@ -14,6 +14,10 @@ const Container = ({ comments = [], addComment = () => {}, userId = '' }) => {
 
 	useEffect(() => {
 		dispatch(Core.doc.actions.fetchCommentsInit(docId));
+
+		return () => {
+			dispatch(Core.doc.actions.fetchCommentsSuccess([]));
+		};
 	}, [docId, dispatch]);
 
 	return (

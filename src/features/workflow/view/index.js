@@ -120,7 +120,7 @@ const Workflow = ({
 	});
 
 	const isApproving =
-		currentStage >= 0
+		currentStage >= 0 && currentStage < users.length - 1
 			? userId === users[currentStage + 1]._id
 			: userId === users[0]._id;
 
