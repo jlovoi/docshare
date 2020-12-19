@@ -31,7 +31,7 @@ export default ChildComponent => {
 			this.setState({ confirm: null });
 			Auth.logout();
 			setTimeout(() => {
-				this.props.history.replace('/login');
+				this.props.history.replace('/');
 				window.location.reload();
 			}, 500);
 		};
